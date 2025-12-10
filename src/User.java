@@ -46,8 +46,8 @@ public class User {
 
     }
 
-    public static int getUsersCount(){
-        String path = FilesStorage.FilePath + "User";
+    public static int getUsersCount(String target){
+        String path = FilesStorage.FilePath + target;
         int fileCount = 0;
         File directory = new File(path);
         File[] files = directory.listFiles();
@@ -63,8 +63,8 @@ public class User {
         return fileCount;
     }
 
-    public static List<String> getUsers(){
-        String path = FilesStorage.FilePath + "User";
+    public static List<String> getUsers(String target){
+        String path = FilesStorage.FilePath + target;
         List<String> filesnames = new ArrayList<String>();
         File directory = new File(path);
         File[] files = directory.listFiles();
@@ -81,7 +81,7 @@ public class User {
 
     public static User Login(String email , String password){
         email = email.replace(".com" , ".txt");
-        List<String> list = FilesStorage.readlines("User/" + email);
+        List<String> list = FilesStorage.readlines("user/" + email); // target path to be changed
 
         User u = new User(list.get(1) , list.get(2) , list.get(3) , list.get(4));
 
