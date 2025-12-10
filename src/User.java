@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 //abstract
@@ -61,6 +62,22 @@ public class User {
 
         return fileCount;
     }
+
+    public static List<String> getUsers(){
+        String path = FilesStorage.FilePath + "User";
+        List<String> filesnames = new ArrayList<String>();
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                filesnames.add(file.getName().replace(".txt" , ".com"));
+            }
+        }
+
+        return filesnames;
+    }
+
 
     public static User Login(String email , String password){
         email = email.replace(".com" , ".txt");
