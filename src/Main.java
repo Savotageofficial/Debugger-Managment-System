@@ -5,7 +5,11 @@ public class Main {
 
 
         //TODO this will be the Home Page
-        System.out.println(FilesStorage.readline(0));
+        System.out.println(FilesStorage.readlines());
+
+        FilesStorage.writeline(2 , "ahmed");
+        System.out.println(FilesStorage.readline(2));
+
 
     }
 }
