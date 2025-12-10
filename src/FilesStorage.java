@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FilesStorage {
-    static String FilePath = "FileStorage/test.txt";
+    static String FilePath = "FileStorage/";
 
 
     public static void append(String input){
@@ -27,9 +27,9 @@ public abstract class FilesStorage {
         }
         return lines.get(index);
     }
-    public static List<String> readlines(){
+    public static List<String> readlines(String targetpath){
         List<String> lines;
-        try (BufferedReader reader = new BufferedReader(new FileReader(FilesStorage.FilePath))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(FilesStorage.FilePath + targetpath))){
 
             lines = reader.readAllLines();
 
@@ -40,6 +40,7 @@ public abstract class FilesStorage {
         }
         return lines;
     }
+
 
     public static void SaveUserData(User user){
 

@@ -5,10 +5,9 @@ public class Main {
 
 
         //TODO this will be the Home Page
-        System.out.println(FilesStorage.readlines());
+        User u1 = User.Login("mohamedsafwat7706@gmail.com" , "123456");
 
-        FilesStorage.writeline(2 , "ahmed");
-        System.out.println(FilesStorage.readline(2));
+        System.out.println(User.getUsersCount());
 
 
     }

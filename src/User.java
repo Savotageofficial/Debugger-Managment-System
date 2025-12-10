@@ -1,13 +1,15 @@
+import java.io.File;
 import java.util.List;
 
-public abstract class User {
+//abstract
+public class User {
 
-    private String ID;
-    public String Name;
-    public String Email;
-    private String Password;
+    private String ID; //0
+    public String Name; //1
+    public String Email; //2
+    private String Password; //3
     static private List<User> Users; //TODO make its default value get imported from a saved list in a file
-    public String UserType;
+    public String UserType; //4
 
     public static List<User> ShowUsers() {
         return Users;
@@ -32,7 +34,7 @@ public abstract class User {
     }
 
 
-    public User(String email, String name, String password, String userType) {
+    private User(String name, String email, String password, String userType) {
         Email = email;
         Name = name;
         Password = password;
@@ -43,11 +45,31 @@ public abstract class User {
 
     }
 
-    public User Login(String email , String password){
-        //TODO Check if email & password provided are included in the file storage then return the user with these credentials
+    public static int getUsersCount(){
+        String path = FilesStorage.FilePath + "User";
+        int fileCount = 0;
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) { // Only count actual files, not subdirectories
+                    fileCount++;
+                }
+            }
+        }
+
+        return fileCount;
+    }
+
+    public static User Login(String email , String password){
+        email = email.replace(".com" , ".txt");
+        List<String> list = FilesStorage.readlines("User/" + email);
+
+        User u = new User(list.get(1) , list.get(2) , list.get(3) , list.get(4));
 
 
-        return null; // TODO Replace null with the User fetched from the file storage
+        return u ;
     }
     public void Logout(){
         //Todo بصراحه مش عارف هعملها ازاي
