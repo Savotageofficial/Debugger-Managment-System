@@ -1,18 +1,23 @@
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
+//abstract
 public abstract class User {
 
-    private String ID;
-    public String Name;
-    public String Email;
-    private String Password;
+    private String ID; //0
+    public String Name; //1
+    public String Email; //2
+    private String Password; //3
     static private List<User> Users; //TODO make its default value get imported from a saved list in a file
-    public String UserType;
+    public String UserType; //4
 
-    public static List<User> ShowUsers() {
-        return Users;
-    }
 
+    private static String filepath = "user";
+
+//    public static List<User> ShowUsers() {
+//        return Users;
+//    }
 
 
     public String getPassword() {
@@ -31,8 +36,10 @@ public abstract class User {
         this.ID = ID;
     }
 
+    protected User() {
+    }
 
-    public User(String email, String name, String password, String userType) {
+    protected User(String name, String email, String password, String userType) {
         Email = email;
         Name = name;
         Password = password;
@@ -43,14 +50,45 @@ public abstract class User {
 
     }
 
-    public User Login(String email , String password){
-        //TODO Check if email & password provided are included in the file storage then return the user with these credentials
+//    public static int getUsersCount(String target) {
+//        String path = FilesStorage.FilePath + target;
+//        int fileCount = 0;
+//        File directory = new File(path);
+//        File[] files = directory.listFiles();
+//
+//        if (files != null) {
+//            for (File file : files) {
+//                if (file.isFile()) { // Only count actual files, not subdirectories
+//                    fileCount++;
+//                }
+//            }
+//        }
+//
+//        return fileCount;
+//    }
+
+//    public static List<String> getallUsers() {
+//        String path = FilesStorage.FilePath + "user";
+//        List<String> filesnames = new ArrayList<String>();
+//        File directory = new File(path);
+//        File[] files = directory.listFiles();
+//
+//        if (files != null) {
+//            for (File file : files) {
+//                filesnames.add(file.getName().replace(".txt", ".com"));
+//            }
+//        }
+//
+//        return filesnames;
+//    }
 
 
-        return null; // TODO Replace null with the User fetched from the file storage
-    }
-    public void Logout(){
+
+
+    public void Logout() {
         //Todo بصراحه مش عارف هعملها ازاي
 
     }
+
+    public abstract List<User> getUsers();
 }
