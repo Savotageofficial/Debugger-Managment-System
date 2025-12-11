@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //abstract
-public class User {
+public abstract class User {
 
     private String ID; //0
     public String Name; //1
@@ -12,10 +12,12 @@ public class User {
     static private List<User> Users; //TODO make its default value get imported from a saved list in a file
     public String UserType; //4
 
-    public static List<User> ShowUsers() {
-        return Users;
-    }
 
+    private static String filepath = "user";
+
+//    public static List<User> ShowUsers() {
+//        return Users;
+//    }
 
 
     public String getPassword() {
@@ -34,8 +36,10 @@ public class User {
         this.ID = ID;
     }
 
+    protected User() {
+    }
 
-    private User(String name, String email, String password, String userType) {
+    protected User(String name, String email, String password, String userType) {
         Email = email;
         Name = name;
         Password = password;
@@ -46,66 +50,53 @@ public class User {
 
     }
 
-    public static int getUsersCount(String target){
-        String path = FilesStorage.FilePath + target;
-        int fileCount = 0;
-        File directory = new File(path);
-        File[] files = directory.listFiles();
+//    public static int getUsersCount(String target) {
+//        String path = FilesStorage.FilePath + target;
+//        int fileCount = 0;
+//        File directory = new File(path);
+//        File[] files = directory.listFiles();
+//
+//        if (files != null) {
+//            for (File file : files) {
+//                if (file.isFile()) { // Only count actual files, not subdirectories
+//                    fileCount++;
+//                }
+//            }
+//        }
+//
+//        return fileCount;
+//    }
 
-        if (files != null) {
-            for (File file : files) {
-                if (file.isFile()) { // Only count actual files, not subdirectories
-                    fileCount++;
-                }
-            }
-        }
+//    public static List<String> getallUsers() {
+//        String path = FilesStorage.FilePath + "user";
+//        List<String> filesnames = new ArrayList<String>();
+//        File directory = new File(path);
+//        File[] files = directory.listFiles();
+//
+//        if (files != null) {
+//            for (File file : files) {
+//                filesnames.add(file.getName().replace(".txt", ".com"));
+//            }
+//        }
+//
+//        return filesnames;
+//    }
 
-        return fileCount;
-    }
 
-    public List<String> getUsers(String target){
-        String path = FilesStorage.FilePath + target;
-        List<String> filesnames = new ArrayList<String>();
-        File directory = new File(path);
-        File[] files = directory.listFiles();
-
-        if (files != null) {
-            for (File file : files) {
-                filesnames.add(file.getName().replace(".txt" , ".com"));
-            }
-        }
-
-        return filesnames;
-//        tgtwdfdgdfd
-    }
-
-    public List<String> getUsers(){
-        String path = FilesStorage.FilePath + "user";
-        List<String> filesnames = new ArrayList<String>();
-        File directory = new File(path);
-        File[] files = directory.listFiles();
-
-        if (files != null) {
-            for (File file : files) {
-                filesnames.add(file.getName().replace(".txt" , ".com"));
-            }
-        }
-
-        return filesnames;
-//        tgtwdfdgdfd
-    }
-
-    public static User Login(String email , String password){
-        email = email.replace(".com" , ".txt");
+    public static User Login(String email, String password) {
+        email = email.replace(".com", ".txt");
         List<String> list = FilesStorage.readlines("user/" + email); // target path to be changed
 
-        User u = new User(list.get(1) , list.get(2) , list.get(3) , list.get(4));
+        User u = new Developer(list.get(1), list.get(2), list.get(3), list.get(4));
 
 
-        return u ;
+        return u;
     }
-    public void Logout(){
+
+    public void Logout() {
         //Todo بصراحه مش عارف هعملها ازاي
 
     }
+
+    public abstract List<User> getUsers();
 }

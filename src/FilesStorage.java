@@ -14,9 +14,9 @@ public abstract class FilesStorage {
         }
     }
 
-    public static String readline(int index){
+    public static String readline(String target, int index){
         List<String> lines;
-        try (BufferedReader reader = new BufferedReader(new FileReader(FilesStorage.FilePath))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(FilesStorage.FilePath + target))){
 
             lines = reader.readAllLines();
 
@@ -27,7 +27,7 @@ public abstract class FilesStorage {
         }
         return lines.get(index);
     }
-    public static List<String> readlines(String targetpath){
+     static List<String> readlines(String targetpath){
         List<String> lines;
         try (BufferedReader reader = new BufferedReader(new FileReader(FilesStorage.FilePath + targetpath))){
 
