@@ -5,10 +5,10 @@ public class Main {
 
 
         //TODO this will be the Home Page
-//        User u1 = User.Login("mohamedsafwat7706@gmail.com" , "123456");
+        User u1 = Auth.Login("mohamedgamesar4321@gmail.com" , "123456");
 
 
-        Developer devs = new Developer();
+        System.out.println(u1.UserType);
 
 
 
