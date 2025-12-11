@@ -63,7 +63,7 @@ public class User {
         return fileCount;
     }
 
-    public static List<String> getUsers(String target){
+    public List<String> getUsers(String target){
         String path = FilesStorage.FilePath + target;
         List<String> filesnames = new ArrayList<String>();
         File directory = new File(path);
