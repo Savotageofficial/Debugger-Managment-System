@@ -1,12 +1,12 @@
 public class Attachment {
-    private String ID ;
+    private String id ;
     private String fileName ;
     private String filePath ;
     private Long size ;
     private String mimeType ;
 
-    public Attachment(String ID, String fileName, String filePath, Long size, String mimeType) {
-        this.ID = ID;
+    public Attachment(String id, String fileName, String filePath, Long size, String mimeType) {
+        this.id = id;
         this.fileName = fileName;
         this.filePath = filePath;
         this.size = size;
@@ -14,34 +14,42 @@ public class Attachment {
     }
 
     public String getId() {
-        return ID;
+
+        return id;
     }
 
-    public void setId(String iD) {
-        ID = iD;
+    public void setId(String id) {
+
+        this.id = id;
     }
 
     public String getFilePath() {
+
         return filePath;
     }
 
     public void setFilePath(String filePath) {
+
         this.filePath = filePath;
     }
 
     public String getFileName() {
+
         return fileName;
     }
 
     public void setFileName(String fileName) {
+
         this.fileName = fileName;
     }
 
     public Long getSize() {
+
         return size;
     }
 
     public void setSize(Long size) {
+
         this.size = size;
     }
 
@@ -50,6 +58,7 @@ public class Attachment {
     }
 
     public void setMimeType(String mimeType) {
+
         this.mimeType = mimeType;
     }
 }
