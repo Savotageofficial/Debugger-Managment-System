@@ -3,3 +3,4 @@ appetite
 an application for recipe showcases
 favourites button doesn't work
 dev1,dev2,dev3,dev4f
+bug1 , bug2
