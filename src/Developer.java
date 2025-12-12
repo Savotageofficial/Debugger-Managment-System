@@ -45,21 +45,9 @@ public class Developer extends User {
     }
 
 
-//    public static List<Developer> showUsers(List<User> users) {
-//        List<Developer> devs = new ArrayList<>();
-//        if (users == null) return devs;
-//
-//        for (User u : users) {
-//            if (u instanceof Developer) {
-//                devs.add((Developer) u);
-//            }
-//        }
-//        return devs;
-//    }
-
     @Override
-    public List<String> getUsers(String target) {
-        target= "developer";
+    public List<String> getUsers() {
+       String target= "developer";
         return super.getUsers(target);
     }
 }

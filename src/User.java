@@ -79,6 +79,21 @@ public class User {
 //        tgtwdfdgdfd
     }
 
+    public List<String> getUsers(){
+        String path = FilesStorage.FilePath + "user";
+        List<String> filesnames = new ArrayList<String>();
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                filesnames.add(file.getName().replace(".txt" , ".com"));
+            }
+        }
+
+        return filesnames;
+//        tgtwdfdgdfd
+    }
 
     public static User Login(String email , String password){
         email = email.replace(".com" , ".txt");
