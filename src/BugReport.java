@@ -32,7 +32,6 @@ public class BugReport {
         this.severity = severity;
         this.reporter = reporter;
         this.assignedProject = assignedProject;
-
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
     } //perfect , just remove assignee from here since it can be null as it is **optional**
@@ -93,11 +92,11 @@ public class BugReport {
         return dateUpdated;
     } // perfect
 
-    public ArrayList<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     } // perfect
 
-    public ArrayList<Attachment> getAttachments() {
+    public List<Attachment> getAttachments() {
         return attachments;
     } // perfect
 
