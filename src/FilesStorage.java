@@ -73,4 +73,18 @@ public abstract class FilesStorage {
 
 
     }
+
+    public static void writefile(String Collection , List<String> lines , String name){
+
+        try(FileWriter writer = new FileWriter(FilePath + Collection + "/" + name)) {
+            for(int i = 0 ; i < lines.size() ; i++){
+                writer.append(lines.get(i) + "\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 }
