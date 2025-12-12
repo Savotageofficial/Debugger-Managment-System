@@ -1,11 +1,13 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Project {
     private String ID;
     private String name;
     private String description;
+    private List<String> developersID=new ArrayList<String>();
 //    private ArrayList<Bug> bugs=new ArrayList<>;
 
  public Project(String ID, String name, String description) {
