@@ -5,8 +5,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         System.out.println("------BUG MANAGMENT SYSTEM-------");
-
-
+       Project p=new Project("2","","");
+      p.readProjectsInfo();
+        System.out.println(p.getName());
         //TODO this will be the Home Page
         Scanner input = new Scanner(System.in);
 
