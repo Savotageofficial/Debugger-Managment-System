@@ -49,10 +49,10 @@ public abstract class FilesStorage {
 
 
 
-    public static void writeline(int index , String text){
+    public static void writeline(String target, int index , String text){
         ArrayList<String> lines;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(FilePath + target))){
 
             lines = new ArrayList<>(reader.readAllLines());
             lines.set(index , text);
@@ -63,7 +63,7 @@ public abstract class FilesStorage {
             throw new RuntimeException(e);
         }
 
-        try(FileWriter writer = new FileWriter(FilePath)) {
+        try(FileWriter writer = new FileWriter(FilePath + target)) {
             for(int i = 0 ; i < lines.size() ; i++){
                 writer.append(lines.get(i) + "\n");
             }
