@@ -23,7 +23,6 @@ public class BugReport {
                      Status status,
                      Severity severity,
                      Tester reporter,
-                     Developer assignee,
                      Project assignedProject) {
 
         this.id = id;
@@ -32,7 +31,6 @@ public class BugReport {
         this.status = status;
         this.severity = severity;
         this.reporter = reporter;
-        this.assignee = assignee;
         this.assignedProject = assignedProject;
 
         this.dateCreated = LocalDateTime.now();
@@ -43,18 +41,10 @@ public class BugReport {
         return id;
     } //perfect
 
-    public void setId(String id) {
-        this.id = id;
-    } //ID cannot be set after initialization , remove setter
 
     public String getTitle() {
         return title;
     } //perfect
-
-    public void setTitle(String title) {
-        this.title = title;
-        this.dateUpdated = LocalDateTime.now();
-    } //Bug report shouldn't change title after being made , remove this setter
 
     public String getDescription() {
         return description;
@@ -68,11 +58,6 @@ public class BugReport {
     public Status getStatus() {
         return status;
     } //perfect
-
-    public void setStatus(Status status) {
-        this.status = status;
-        this.dateUpdated = LocalDateTime.now();
-    } // collides with change status , same functionality different names , remove setter and leave the change status
 
     public Severity getSeverity() {
         return severity;
@@ -96,19 +81,9 @@ public class BugReport {
         return assignee;
     } //perfect
 
-    public void setAssignee(Developer assignee) {
-        this.assignee = assignee;
-        this.dateUpdated = LocalDateTime.now();
-    } //assignee cannot be set , instead you use the Assign to function , remove this setter
-
     public Project getAssignedProject() {
         return assignedProject;
     } //perfect
-
-    public void setAssignedProject(Project assignedProject) {
-        this.assignedProject = assignedProject;
-        this.dateUpdated = LocalDateTime.now();
-    } // cannot re Assign the bug to another project , unlogical to do so , remove this setter
 
     public LocalDateTime getDateCreated() {
         return dateCreated;
