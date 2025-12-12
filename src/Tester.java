@@ -1,4 +1,3 @@
-import javax.print.attribute.standard.Severity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,9 @@ public class Tester extends User {
         if (projectID == null) {
             throw new IllegalArgumentException("Project cannot be null");
         }
+
+        List<String> projectfile = FilesStorage.readlines("projects/" + projectID + ".txt");
+        Project project = new Project(projectID , projectfile.get(1) , projectfile.get(2));
         BugReport bugreport = new BugReport(
                 "bug3",
                 title,
@@ -20,8 +22,7 @@ public class Tester extends User {
                 Status.NEW,
                 severity,
                 this,
-                null,
-                projectID
+                project
         );
 //        project.addBugReport(bug);
 
