@@ -47,6 +47,32 @@ public class Project {
         }
     }
 
+    public void addDeveloper(String dev){
+
+     String[] Devs = FilesStorage.readline("projects/" + ID + ".txt" , 4).split(",");
+
+     List<String> Devslist = new ArrayList<String>(List.of(Devs));
+
+     Devslist.add(dev);
+     StringBuilder newline = new StringBuilder("");
+
+     for (String developer : Devslist){
+         newline.append(developer + ",");
+     }
+
+     newline.deleteCharAt(newline.length() -1);
+
+
+
+     FilesStorage.writeline("projects/" + ID + ".txt" , 4 , newline.toString());
+
+
+
+
+
+
+    }
+
 
 }
 
