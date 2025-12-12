@@ -2,11 +2,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class admin extends User{
-    public admin(String email, String name, String password, String userType) {
+public class Admin extends User{
+
+    public Admin(String email, String name, String password, String userType) {
         super(email, name, password, userType);
     }
-    public void creatuser(String username,String email,String passowrd, String Usertype)
+
+    public Admin() {
+    }
+
+    public void creatuser(String username, String email, String passowrd, String Usertype)
     {
 
     }
@@ -27,7 +32,7 @@ public class admin extends User{
 
     @Override
     public List<User> getUsers() {
-        String path = FilesStorage.FilePath + "developer";
+        String path = FilesStorage.FilePath + "admin";
         List<User> Users = new ArrayList<User>();
         File directory = new File(path);
         File[] files = directory.listFiles();
