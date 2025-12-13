@@ -36,6 +36,7 @@ public class Developer extends User {
             for(String proid : assignedProjectsIDs){
                 newliststring.append(proid + ",");
             }
+            newliststring.deleteCharAt(newliststring.length() -1);
             FilesStorage.writeline("developer/" + this.getID() + ".txt" , 5 , newliststring.toString());
 
         }
