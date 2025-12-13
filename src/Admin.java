@@ -19,8 +19,8 @@ public class Admin extends User {
         lines.add(email);
         lines.add(password);
         lines.add("developer");
-        lines.add("");
-        lines.add("");
+        lines.add(" ");
+        lines.add(" ");
         FilesStorage.writefile("developer", lines, id + ".txt");
     }
 
