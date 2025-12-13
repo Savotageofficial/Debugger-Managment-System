@@ -55,12 +55,12 @@ public abstract class FilesStorage {
 
     public static BugReport fetchBugData(String bugid){
         List<String> buglist = FilesStorage.readlines("bugreports/" + bugid + ".txt");
-
         List<String> testerlist = FilesStorage.readlines("tester/" + FilesStorage.readline("bugreports/" + bugid + ".txt", 5) + ".txt");
+        List<String> projectlist = FilesStorage.readlines("projects/" + FilesStorage.readline("bugreports/" + bugid + ".txt", 7) + ".txt");
+
 
         Tester tester = new Tester(testerlist.get(0) , testerlist.get(1) , testerlist.get(2) , testerlist.get(3));
 
-        List<String> projectlist = FilesStorage.readlines("projects/" + FilesStorage.readline("bugreports/" + bugid + ".txt", 7) + ".txt");
 
         Project project = new Project(projectlist.get(0) , projectlist.get(1) , projectlist.get(2) , projectlist.get(3) , List.of(projectlist.get(4).split(",")) , List.of(projectlist.get(5).split(",")));
 
