@@ -4,8 +4,11 @@ import java.util.List;
 
 public class Tester extends User {
 
-    public Tester(String email, String name, String password) {
-        super(email, name, password, "Tester");
+    public Tester(String id ,String email, String name, String password) {
+        super(id ,email, name, password, "Tester");
+    }
+
+    public Tester() {
     }
 
     public void reportBug(String projectID, String title, String description, Severity severity) {
@@ -14,21 +17,22 @@ public class Tester extends User {
         }
 
         List<String> projectfile = FilesStorage.readlines("projects/" + projectID + ".txt");
-        Project project = new Project(projectID , projectfile.get(1) , projectfile.get(2));
+        Project project = new Project(projectID , projectfile.get(1) , projectfile.get(2) , projectfile.get(3) , List.of(projectfile.get(4).split(",")), List.of(projectfile.get(5).split(",")));
         BugReport bugreport = new BugReport(
-                "bug3",
+                Auth.generateID("bug"),
                 title,
                 description,
                 Status.NEW,
                 severity,
                 this,
+                null,
                 project
         );
 //        project.addBugReport(bug);
 
         List<String> bugs = List.of(FilesStorage.readline("projects/" + projectID + ".txt" , 5).split(","));
 
-        bugs.add(bugreport.getId());
+        bugs.add(bugreport.getID());
         StringBuilder newline = new StringBuilder("");
 
         for (String bug : bugs){
@@ -40,10 +44,10 @@ public class Tester extends User {
         FilesStorage.writeline("projects/" + projectID + ".txt" , 5 , newline.toString());
 
         List<String> bugreportStringList;
-        bugreportStringList = List.of(bugreport.getId() , bugreport.getTitle() , bugreport.getDescription() , bugreport.getReporter().getID() , bugreport.getAssignee().getID() , bugreport.getAssignedProject().getID() , bugreport.getDateCreated().toString() , bugreport.getDateUpdated().toString());
+        bugreportStringList = List.of(bugreport.getID() , bugreport.getTitle() , bugreport.getDescription() , bugreport.getReporter().getID() , bugreport.getAssignee().getID() , bugreport.getAssignedProject().getID() , bugreport.getDateCreated().toString() , bugreport.getDateUpdated().toString());
 
 
-        FilesStorage.writefile("BugReports" , bugreportStringList , bugreport.getId());
+        FilesStorage.writefile("BugReports" , bugreportStringList , bugreport.getID());
     }
 
 
@@ -67,19 +71,15 @@ public class Tester extends User {
 
         if (files != null) {
             for (File file : files) {
-                Users.add(new Developer(
+                Users.add(new Tester(
+                        FilesStorage.readline("tester/" + file.getName() , 0),
                         FilesStorage.readline("tester/" + file.getName() , 1),
                         FilesStorage.readline("tester/" + file.getName() , 2),
-                        FilesStorage.readline("tester/" + file.getName() , 3),
-                        FilesStorage.readline("tester/" + file.getName() , 4)
+                        FilesStorage.readline("tester/" + file.getName() , 3)
                 ));
             }
         }
 
         return Users;
-    }
-
-    private String generateID() {
-        return "bug-" + System.currentTimeMillis() + "-" + hashCode();
     }
 }

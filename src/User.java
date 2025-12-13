@@ -39,7 +39,8 @@ public abstract class User {
     protected User() {
     }
 
-    protected User(String name, String email, String password, String userType) {
+    protected User(String id , String name, String email, String password, String userType) {
+        ID = id;
         Email = email;
         Name = name;
         Password = password;

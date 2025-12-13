@@ -4,18 +4,23 @@ import java.util.List;
 
 public class Admin extends User{
 
-    public Admin(String email, String name, String password, String userType) {
-        super(email, name, password, userType);
+    public Admin(String id ,String email, String name, String password) {
+        super(id , email, name, password, "admin");
     }
 
     public Admin() {
     }
 
-    public void creatuser(String username, String email, String passowrd, String Usertype)
-    {
+    public void creatuser(String username, String email, String passowrd, String Usertype) {
+
+
 
     }
     public void creatproject(String name, String description){
+
+    }
+    public BugReport generateReport(String name, String description){
+        return null;
 
     }
     public void deletproject(String projectId){
@@ -39,11 +44,11 @@ public class Admin extends User{
 
         if (files != null) {
             for (File file : files) {
-                Users.add(new Developer(
+                Users.add(new Admin(
+                        FilesStorage.readline("admin/" + file.getName() , 0),
                         FilesStorage.readline("admin/" + file.getName() , 1),
                         FilesStorage.readline("admin/" + file.getName() , 2),
-                        FilesStorage.readline("admin/" + file.getName() , 3),
-                        FilesStorage.readline("admin/" + file.getName() , 4)
+                        FilesStorage.readline("admin/" + file.getName() , 3)
                 ));
             }
         }
