@@ -54,6 +54,11 @@ public class Admin extends User {
     }
 
     public void deletproject(String projectid) {
+        List<String> bugsid = List.of(FilesStorage.readline("projects/" + projectid + ".txt", 5).split(","));
+
+        for (String bugid : bugsid){
+            FilesStorage.deletefile("bugreports/" + bugid + ".txt");
+        }
         FilesStorage.deletefile("projects/" + projectid + ".txt");
     }
 
