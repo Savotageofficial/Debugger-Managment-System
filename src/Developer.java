@@ -5,11 +5,17 @@ import java.util.List;
 
 public class Developer extends User {
 
-//    private List<Project> assignedProjects = new ArrayList<>();
-//    private List<BugReport> assignedBugs = new ArrayList<>();
+    private List<String> assignedProjectsIDs = new ArrayList<>();
+    private List<String> assignedBugsIDs = new ArrayList<>();
 
-    public Developer(String name, String email, String password, String userType) {
-        super(name, email, password, userType);
+    public Developer(String id ,String name, String email, String password) {
+        super(id ,name, email, password, "developer");
+    }
+
+    public Developer(String id, String name, String email, String password, List<String> assignedProjects, List<String> assignedBugs) {
+        super(id, name, email, password, "developer");
+        this.assignedProjectsIDs = assignedProjects;
+        this.assignedBugsIDs = assignedBugs;
     }
 
     public Developer() {
@@ -22,35 +28,35 @@ public class Developer extends User {
 //    }
 
 
-//    public List<Project> getAssignedProjects() {
-//        return assignedProjects;
-//    }
-//
-//    public List<BugReport> getAssignedBugs() {
-//        return assignedBugs;
-//    }
-//
-//
-//    public void assignProject(Project project) {
-//        if (project != null && !assignedProjects.contains(project)) {
-//            assignedProjects.add(project);
-//        }
-//    }
-//
-//    public void removeProject(Project project) {
-//        assignedProjects.remove(project);
-//    }
-//
-//
-//    public void assignBug(BugReport bug) {
-//        if (bug != null && !assignedBugs.contains(bug)) {
-//            assignedBugs.add(bug);
-//        }
-//    }
-//
-//    public void removeBug(BugReport bug) {
-//        assignedBugs.remove(bug);
-//    }
+    public List<String> getAssignedProjectsIDs() {
+        return assignedProjectsIDs;
+    }
+
+    public List<String> getAssignedBugs() {
+        return assignedBugsIDs;
+    }
+
+
+    public void assignProject(String projectid) {
+        if (projectid != null && !assignedProjectsIDs.contains(projectid)) {
+            assignedProjectsIDs.add(projectid);
+        }
+    }
+
+    public void removeProject(String projectid) {
+        assignedProjectsIDs.remove(projectid);
+    }
+
+
+    public void assignBug(String bugid) {
+        if (bugid != null && !assignedBugsIDs.contains(bugid)) {
+            assignedBugsIDs.add(bugid);
+        }
+    }
+
+    public void removeBug(String bug) {
+        assignedBugsIDs.remove(bug);
+    }
 
 
     @Override
@@ -63,10 +69,12 @@ public class Developer extends User {
         if (files != null) {
             for (File file : files) {
                 Users.add(new Developer(
+                        FilesStorage.readline("developer/" + file.getName() , 0),
                         FilesStorage.readline("developer/" + file.getName() , 1),
                         FilesStorage.readline("developer/" + file.getName() , 2),
                         FilesStorage.readline("developer/" + file.getName() , 3),
-                        FilesStorage.readline("developer/" + file.getName() , 4)
+                        List.of(FilesStorage.readline("developer/" + file.getName() , 5).split(",")),
+                        List.of(FilesStorage.readline("developer/" + file.getName() , 6).split(","))
                 ));
             }
         }
