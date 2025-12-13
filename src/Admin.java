@@ -7,7 +7,7 @@ public class Admin extends User {
     public Admin(String id, String email, String name, String password) {
         super(id, email, name, password, "Admin");
     }
-public Admin(){}
+    public Admin(){}
 
     public void creatdeveloper(String username, String email, String password, String Usertype) {
         String id = Auth.generateID("developer");
@@ -35,7 +35,7 @@ public Admin(){}
 
         FilesStorage.writefile("tester", lines, id + ".txt");
     }
-}
+
 
 
 
