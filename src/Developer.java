@@ -68,14 +68,7 @@ public class Developer extends User {
 
         if (files != null) {
             for (File file : files) {
-                Users.add(new Developer(
-                        FilesStorage.readline("developer/" + file.getName() , 0),
-                        FilesStorage.readline("developer/" + file.getName() , 1),
-                        FilesStorage.readline("developer/" + file.getName() , 2),
-                        FilesStorage.readline("developer/" + file.getName() , 3),
-                        List.of(FilesStorage.readline("developer/" + file.getName() , 5).split(",")),
-                        List.of(FilesStorage.readline("developer/" + file.getName() , 6).split(","))
-                ));
+                Users.add(FilesStorage.fetchDeveloper(file.getName().replace(".txt" , "")));
             }
         }
 

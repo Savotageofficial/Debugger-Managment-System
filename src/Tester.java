@@ -71,12 +71,7 @@ public class Tester extends User {
 
         if (files != null) {
             for (File file : files) {
-                Users.add(new Tester(
-                        FilesStorage.readline("tester/" + file.getName() , 0),
-                        FilesStorage.readline("tester/" + file.getName() , 1),
-                        FilesStorage.readline("tester/" + file.getName() , 2),
-                        FilesStorage.readline("tester/" + file.getName() , 3)
-                ));
+                Users.add(FilesStorage.fetchTester(file.getName().replace(".txt" , "")));
             }
         }
 

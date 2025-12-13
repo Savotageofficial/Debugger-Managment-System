@@ -80,6 +80,56 @@ public abstract class FilesStorage {
         return new BugReport(buglist.get(0) , buglist.get(1) , buglist.get(2) , Status.valueOf(buglist.get(3)) , Severity.valueOf(buglist.get(4)), tester , developer , project);
     }
 
+    public static Developer fetchDeveloper(String devid){
+
+        List<String> devdata = FilesStorage.readlines("developer/" + devid + ".txt");
+
+        Developer dev = new Developer(
+                devdata.get(0),
+                devdata.get(1),
+                devdata.get(2),
+                devdata.get(3),
+                List.of(devdata.get(4).split(",")),
+                List.of(devdata.get(5).split(","))
+
+        );
+
+        return dev;
+
+    }
+
+    public static Tester fetchTester(String tesid){
+
+        List<String> tesdata = FilesStorage.readlines("tester/" + tesid + ".txt");
+
+        Tester tes = new Tester(
+                tesdata.get(0),
+                tesdata.get(1),
+                tesdata.get(2),
+                tesdata.get(3)
+
+        );
+
+        return tes;
+
+    }
+
+    public static Admin fetchAdmin(String admid){
+
+        List<String> admdata = FilesStorage.readlines("admin/" + admid + ".txt");
+
+        Admin adm = new Admin(
+                admdata.get(0),
+                admdata.get(1),
+                admdata.get(2),
+                admdata.get(3)
+        );
+
+        return adm;
+
+    }
+
+
 
 
     public static void writeline(String target, int index , String text){
@@ -104,6 +154,14 @@ public abstract class FilesStorage {
             throw new RuntimeException(e);
         }
 
+
+    }
+
+
+    public static void deletefile(String target){
+        File file = new File(FilesStorage.FilePath + target);
+
+        file.delete();
 
     }
 
