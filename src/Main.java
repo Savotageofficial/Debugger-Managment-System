@@ -1,15 +1,18 @@
 import java.io.*;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         System.out.println("------BUG MANAGMENT SYSTEM-------");
-        Project p=new Project("pro1","","");
-        p.addDeveloper("dev4");
+       Project p=new Project("pro1","","","");
 
-        //TODO this will be the Home Page
+//        p.addDeveloper("dev5");
+//        String lines=
+        p.readProjectFile();
+
+
+//        //TODO this will be the Home Page
 //        Scanner input = new Scanner(System.in);
 //
 //        System.out.print("enter your email: ");
@@ -77,5 +80,5 @@ public class Main {
 //
 //        // Ensure the output is flushed immediately
 //        System.out.flush();
-    } //can be removed safely
+   } //can be removed safely
 }

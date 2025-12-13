@@ -14,7 +14,7 @@ public class Tester extends User {
         }
 
         List<String> projectfile = FilesStorage.readlines("projects/" + projectID + ".txt");
-        Project project = new Project(projectID , projectfile.get(1) , projectfile.get(2));
+        Project project = new Project(projectID , projectfile.get(1) , projectfile.get(2),projectfile.get(3));
         BugReport bugreport = new BugReport(
                 "bug3",
                 title,
