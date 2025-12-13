@@ -28,7 +28,9 @@ public class BugReport {
                      Severity severity,
                      Tester reporter,
                      Developer assignee,
-                     Project assignedProject) {
+                     Project assignedProject,
+                     List<Comment> comments,
+                     List<Attachment> attachments) {
 
         this.ID = id;
         this.title = title;
@@ -40,6 +42,8 @@ public class BugReport {
         this.assignedProject = assignedProject;
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
+        this.comments = comments;
+        this.attachments = attachments;
     } //perfect , just remove assignee from here since it can be null as it is **optional**
 
     public BugReport() {
@@ -154,24 +158,27 @@ public class BugReport {
                 Tester tester = new Tester(testerlist.get(0) , testerlist.get(1) , testerlist.get(2) , testerlist.get(3));
 
 
-                List<String> projectlist = FilesStorage.readlines("projects/" + FilesStorage.readline("bugreports/" + file.getName() , 5) + ".txt");
+//                List<String> projectlist = FilesStorage.readlines("projects/" + FilesStorage.readline("bugreports/" + file.getName() , 5) + ".txt");
+//
+//                Project project = new Project(projectlist.get(0) , projectlist.get(1) , projectlist.get(2) , projectlist.get(3) , List.of(projectlist.get(4).split(",")) , List.of(projectlist.get(5).split(",")));
+//
+//                List<String> devlist = FilesStorage.readlines("developer/" + FilesStorage.readline("bugreports/" + file.getName() , 5) + ".txt");
+//
+//                Developer developer = new Developer(projectlist.get(0) , projectlist.get(1) , projectlist.get(2) , projectlist.get(3) , List.of(projectlist.get(4).split(",")) , List.of(projectlist.get(5).split(",")));
 
-                Project project = new Project(projectlist.get(0) , projectlist.get(1) , projectlist.get(2) , projectlist.get(3) , List.of(projectlist.get(4).split(",")) , List.of(projectlist.get(5).split(",")));
 
-                List<String> devlist = FilesStorage.readlines("developer/" + FilesStorage.readline("bugreports/" + file.getName() , 5) + ".txt");
+//                new BugReport(
+//                        FilesStorage.readline("bugreports/" + file.getName() , 0),
+//                        FilesStorage.readline("bugreports/" + file.getName() , 1),
+//                        FilesStorage.readline("bugreports/" + file.getName() , 2),
+//                        Status.valueOf(FilesStorage.readline("bugreports/" + file.getName() , 3).toUpperCase()),
+//                        Severity.valueOf(FilesStorage.readline("bugreports/" + file.getName() , 4).toUpperCase()),
+//                        tester,
+//                        developer,
+//                        project,
 
-                Developer developer = new Developer(projectlist.get(0) , projectlist.get(1) , projectlist.get(2) , projectlist.get(3) , List.of(projectlist.get(4).split(",")) , List.of(projectlist.get(5).split(",")));
 
-                bugReports.add(new BugReport(
-                        FilesStorage.readline("bugreports/" + file.getName() , 0),
-                        FilesStorage.readline("bugreports/" + file.getName() , 1),
-                        FilesStorage.readline("bugreports/" + file.getName() , 2),
-                        Status.valueOf(FilesStorage.readline("bugreports/" + file.getName() , 3).toUpperCase()),
-                        Severity.valueOf(FilesStorage.readline("bugreports/" + file.getName() , 4).toUpperCase()),
-                        tester,
-                        developer,
-                        project
-                ));
+                        bugReports.add(FilesStorage.fetchBugData(file.getName().replace(".txt" , "")));
             }
         }
 

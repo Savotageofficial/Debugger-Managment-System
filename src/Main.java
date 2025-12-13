@@ -104,6 +104,27 @@ public class Main {
             System.out.print("choice: ");
             choice = input.nextInt();
 
+            BugReport selectedbug = bugReports.get(choice);
+
+            System.out.println("------" + selectedbug.getTitle() + "------\n");
+
+            System.out.println("-Comments");
+
+            List<Comment> comments = selectedbug.getComments();
+
+            if(comments != null) {
+                for (int i = 0; i < comments.toArray().length; i++) {
+
+                    System.out.println(i + "\t" + comments.get(i).getText() + "\t\tAuthor:" + FilesStorage.fetchDeveloper(comments.get(i).getAuthor()).Name);
+
+                }
+            }else {
+                System.out.println("no Comments yet");
+            }
+
+
+
+
 
 
 

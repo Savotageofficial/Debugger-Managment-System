@@ -26,7 +26,9 @@ public class Tester extends User {
                 severity,
                 this,
                 null,
-                project
+                project,
+                null,
+                null
         );
 //        project.addBugReport(bug);
 

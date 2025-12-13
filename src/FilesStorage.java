@@ -73,11 +73,35 @@ public abstract class FilesStorage {
             developer = new Developer(projectlist.get(0) , projectlist.get(1) , projectlist.get(2) , projectlist.get(3) , List.of(projectlist.get(4).split(",")) , List.of(projectlist.get(5).split(",")));
         }
 
+        List<String> commentids = List.of(buglist.get(10).split(","));
+
+        List<Comment> comments = new ArrayList<Comment>();
+
+        if (commentids.get(0).equalsIgnoreCase("null")){
+            comments = null;
+        }else {
+            for (String commentid : commentids) {
+                comments.add(fetchComment(commentid));
+            }
+        }
+
+
+        List<String> attachmentsids = List.of(buglist.get(11).split(","));
+        List<Attachment> attachments = new ArrayList<Attachment>();
+
+        if (attachmentsids.get(0).equalsIgnoreCase("null")){
+            attachments = null;
+        }else {
+            for (String attachmentid : attachmentsids) {
+                attachments.add(fetchAttachment(attachmentid));
+
+            }
+        }
 
 
 
 
-        return new BugReport(buglist.get(0) , buglist.get(1) , buglist.get(2) , Status.valueOf(buglist.get(3)) , Severity.valueOf(buglist.get(4)), tester , developer , project);
+        return new BugReport(buglist.get(0) , buglist.get(1) , buglist.get(2) , Status.valueOf(buglist.get(3)) , Severity.valueOf(buglist.get(4)), tester , developer , project , comments , attachments);
     }
 
     public static Developer fetchDeveloper(String devid){
@@ -89,8 +113,8 @@ public abstract class FilesStorage {
                 devdata.get(1),
                 devdata.get(2),
                 devdata.get(3),
-                List.of(devdata.get(4).split(",")),
-                List.of(devdata.get(5).split(","))
+                List.of(devdata.get(5).split(",")),
+                List.of(devdata.get(6).split(","))
 
         );
 
@@ -127,6 +151,22 @@ public abstract class FilesStorage {
 
         return adm;
 
+    }
+
+    public static Comment fetchComment(String comid){
+        List<String> commentdetails = FilesStorage.readlines("comments/" + comid + ".txt");
+
+        Comment comment = new Comment(commentdetails.get(0) , commentdetails.get(1) , commentdetails.get(2) , commentdetails.get(3));
+
+        return comment;
+    }
+
+    public static Attachment fetchAttachment(String attid){
+        List<String> attachmentdetails = FilesStorage.readlines("attachment/" + attid + ".txt");
+
+        Attachment attachment = new Attachment(attachmentdetails.get(0) , attachmentdetails.get(1) , attachmentdetails.get(2) , Long.parseLong(attachmentdetails.get(3)) , attachmentdetails.get(4));
+
+        return attachment;
     }
 
 
