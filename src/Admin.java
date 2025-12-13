@@ -9,6 +9,7 @@ public class Admin extends User{
     }
 
     public Admin() {
+        super();
     }
 
     public void creatuser(String username, String email, String passowrd, String Usertype) {
@@ -44,12 +45,7 @@ public class Admin extends User{
 
         if (files != null) {
             for (File file : files) {
-                Users.add(new Admin(
-                        FilesStorage.readline("admin/" + file.getName() , 0),
-                        FilesStorage.readline("admin/" + file.getName() , 1),
-                        FilesStorage.readline("admin/" + file.getName() , 2),
-                        FilesStorage.readline("admin/" + file.getName() , 3)
-                ));
+                Users.add(FilesStorage.fetchAdmin(file.getName().replace(".txt" , "")));
             }
         }
 
