@@ -157,6 +157,14 @@ public abstract class FilesStorage {
 
     }
 
+
+    public static void deletefile(String target){
+        File file = new File(FilesStorage.FilePath + target);
+
+        file.delete();
+
+    }
+
     public static void writefile(String Collection , List<String> lines , String name){
 
         try(FileWriter writer = new FileWriter(FilePath + Collection + "/" + name)) {
