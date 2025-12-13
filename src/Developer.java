@@ -31,7 +31,12 @@ public class Developer extends User {
     public void assignProject(String projectid) {
         if (projectid != null && !assignedProjectsIDs.contains(projectid)) {
             assignedProjectsIDs.add(projectid);
-            FilesStorage.writeline("developer/");
+            StringBuilder newliststring = new StringBuilder("");
+
+            for(String proid : assignedProjectsIDs){
+                newliststring.append(proid + ",");
+            }
+            FilesStorage.writeline("developer/" + this.getID() + ".txt" , 5 , newliststring.toString());
 
         }
 
