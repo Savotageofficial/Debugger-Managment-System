@@ -7,7 +7,9 @@ public class Admin extends User {
     public Admin(String id, String email, String name, String password) {
         super(id, email, name, password, "Admin");
     }
-    public Admin(){}
+
+    public Admin() {
+    }
 
     public void creatdeveloper(String username, String email, String password, String Usertype) {
         String id = Auth.generateID("developer");
@@ -37,7 +39,23 @@ public class Admin extends User {
     }
 
 
+    public void createProject(String projectId, String name, String description) {
 
+        List<String> lines = new ArrayList<>();
+
+        lines.add(projectId);
+        lines.add(name);
+        lines.add(description);
+        lines.add(" ");
+        lines.add(" ");
+        lines.add(" ");
+
+        FilesStorage.writefile("projects", lines, projectId + ".txt");
+    }
+
+    public void deletproject(String projectid) {
+        FilesStorage.deletefile("projects/" + projectid + ".txt");
+    }
 
 
 
@@ -51,10 +69,10 @@ public class Admin extends User {
         if (files != null) {
             for (File file : files) {
                 Users.add(new Admin(
-                        FilesStorage.readline("admin/" + file.getName() , 0),
-                        FilesStorage.readline("admin/" + file.getName() , 1),
-                        FilesStorage.readline("admin/" + file.getName() , 2),
-                        FilesStorage.readline("admin/" + file.getName() , 3)
+                        FilesStorage.readline("admin/" + file.getName(), 0),
+                        FilesStorage.readline("admin/" + file.getName(), 1),
+                        FilesStorage.readline("admin/" + file.getName(), 2),
+                        FilesStorage.readline("admin/" + file.getName(), 3)
                 ));
             }
         }
