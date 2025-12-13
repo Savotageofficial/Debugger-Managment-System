@@ -2,34 +2,40 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends User{
+public class Admin extends User {
 
-    public Admin(String id ,String email, String name, String password) {
-        super(id , email, name, password, "admin");
+    public Admin(String id, String email, String name, String password) {
+        super(id, email, name, password, "Admin");
+    }
+public Admin(){}
+
+    public void creatdeveloper(String username, String email, String password, String Usertype) {
+        String id = Auth.generateID("developer");
+        List<String> lines = new ArrayList<>();
+        lines.add(id);
+        lines.add(username);
+        lines.add(email);
+        lines.add(password);
+        lines.add("developer");
+        lines.add("");
+        lines.add("");
+        FilesStorage.writefile("developer", lines, id + ".txt");
     }
 
-    public Admin() {
+    public void creattester(String username, String email, String password, String Usertype) {
+        String id = Auth.generateID("tester");
+        List<String> lines = new ArrayList<>();
+
+
+        lines.add(id);
+        lines.add(username);
+        lines.add(email);
+        lines.add(password);
+        lines.add("tester");
+
+        FilesStorage.writefile("tester", lines, id + ".txt");
     }
-
-    public void creatuser(String username, String email, String passowrd, String Usertype) {
-
-
-
-    }
-    public void creatproject(String name, String description){
-
-    }
-    public BugReport generateReport(String name, String description){
-        return null;
-
-    }
-    public void deletproject(String projectId){
-
-    }
-    public void Assignto(String projectId, String developerId){}
-
-
-
+}
 
 
 
@@ -56,4 +62,3 @@ public class Admin extends User{
         return Users;
     }
 }
-
