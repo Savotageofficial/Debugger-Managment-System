@@ -2,37 +2,65 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends User{
+public class Admin extends User {
 
-    public Admin(String id ,String email, String name, String password) {
-        super(id , email, name, password, "admin");
+    public Admin(String id, String email, String name, String password) {
+        super(id, email, name, password, "Admin");
     }
 
     public Admin() {
-        super();
     }
 
-    public void creatuser(String username, String email, String passowrd, String Usertype) {
-
-
-
+    public void creatdeveloper(String username, String email, String password, String Usertype) {
+        String id = Auth.generateID("developer");
+        List<String> lines = new ArrayList<>();
+        lines.add(id);
+        lines.add(username);
+        lines.add(email);
+        lines.add(password);
+        lines.add("developer");
+        lines.add(" ");
+        lines.add(" ");
+        FilesStorage.writefile("developer", lines, id + ".txt");
     }
-    public void creatproject(String name, String description){
 
+    public void creattester(String username, String email, String password, String Usertype) {
+        String id = Auth.generateID("tester");
+        List<String> lines = new ArrayList<>();
+
+
+        lines.add(id);
+        lines.add(username);
+        lines.add(email);
+        lines.add(password);
+        lines.add("tester");
+
+        FilesStorage.writefile("tester", lines, id + ".txt");
     }
-    public BugReport generateReport(String name, String description){
-        return null;
 
+
+    public void createProject(String projectId, String name, String description) {
+
+        List<String> lines = new ArrayList<>();
+
+        lines.add(projectId);
+        lines.add(name);
+        lines.add(description);
+        lines.add(" ");
+        lines.add(" ");
+        lines.add(" ");
+
+        FilesStorage.writefile("projects", lines, projectId + ".txt");
     }
-    public void deletproject(String projectId){
 
+    public void deletproject(String projectid) {
+        List<String> bugsid = List.of(FilesStorage.readline("projects/" + projectid + ".txt", 5).split(","));
+
+        for (String bugid : bugsid){
+            FilesStorage.deletefile("bugreports/" + bugid + ".txt");
+        }
+        FilesStorage.deletefile("projects/" + projectid + ".txt");
     }
-    public void Assignto(String projectId, String developerId){}
-
-
-
-
-
 
 
 
@@ -45,11 +73,15 @@ public class Admin extends User{
 
         if (files != null) {
             for (File file : files) {
-                Users.add(FilesStorage.fetchAdmin(file.getName().replace(".txt" , "")));
+                Users.add(new Admin(
+                        FilesStorage.readline("admin/" + file.getName(), 0),
+                        FilesStorage.readline("admin/" + file.getName(), 1),
+                        FilesStorage.readline("admin/" + file.getName(), 2),
+                        FilesStorage.readline("admin/" + file.getName(), 3)
+                ));
             }
         }
 
         return Users;
     }
 }
-
