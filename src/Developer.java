@@ -45,20 +45,41 @@ public class Developer extends User {
 
     public void removeProject(String projectid) {
         assignedProjectsIDs.remove(projectid);
+
+        StringBuilder newliststring = new StringBuilder("");
+
+        for(String proid : assignedProjectsIDs){
+            newliststring.append(proid + ",");
+        }
+        newliststring.deleteCharAt(newliststring.length() -1);
+        FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
     }
 
 
     public void assignBug(String bugid) {
         if (bugid != null && !assignedBugsIDs.contains(bugid)) {
             assignedBugsIDs.add(bugid);
+            StringBuilder newliststring = new StringBuilder("");
+
+            for(String bugID : assignedBugsIDs){
+                newliststring.append(bugID + ",");
+            }
+            newliststring.deleteCharAt(newliststring.length() -1);
+            FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
         }
     }
 
     public void removeBug(String bug) {
         assignedBugsIDs.remove(bug);
+        StringBuilder newliststring = new StringBuilder("");
+
+        for(String bugid : assignedBugsIDs){
+            newliststring.append(bugid + ",");
+        }
+        newliststring.deleteCharAt(newliststring.length() -1);
+        FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
+
     }
-
-
     @Override
     public List<User> getUsers() {
         String path = FilesStorage.FilePath + "developer";
