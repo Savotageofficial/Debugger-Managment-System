@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-
+        new LoginFrame().setVisible(true);
         System.out.println("------BUG MANAGMENT SYSTEM-------");
         // Project p=new Project("pro1","","");
         // p.addDeveloper("dev4");
