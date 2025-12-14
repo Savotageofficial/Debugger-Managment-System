@@ -1,4 +1,4 @@
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +8,6 @@ public class Developer extends User {
     private List<String> assignedProjectsIDs = new ArrayList<>();
     private List<String> assignedBugsIDs = new ArrayList<>();
 
-    public Developer(String id ,String name, String email, String password) {
-        super(id ,name, email, password, "developer");
-    }
 
     public Developer(String id, String name, String email, String password, List<String> assignedProjects, List<String> assignedBugs) {
         super(id, name, email, password, "developer");
@@ -21,12 +18,6 @@ public class Developer extends User {
     public Developer() {
         super();
     }
-
-//    public Developer(String name, String email, String password) {
-//        super(name, email, password);
-//        this.userType = "Developer";
-//    }
-
 
     public List<String> getAssignedProjectsIDs() {
         return assignedProjectsIDs;
@@ -40,7 +31,10 @@ public class Developer extends User {
     public void assignProject(String projectid) {
         if (projectid != null && !assignedProjectsIDs.contains(projectid)) {
             assignedProjectsIDs.add(projectid);
+            FilesStorage.writeline("developer/");
+
         }
+
     }
 
     public void removeProject(String projectid) {
