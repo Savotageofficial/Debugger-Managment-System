@@ -58,6 +58,19 @@ public class Developer extends User {
         assignedBugsIDs.remove(bug);
     }
 
+    public void updateBugStatus(BugReport bug){
+        Status status = bug.getStatus();
+        if (status == Status.NEW){
+            bug.changeStatus(Status.IN_PROGRESS);
+
+        } else if (status == Status.ASSIGNED) {
+            bug.changeStatus(Status.IN_PROGRESS);
+
+        } else if (status == Status.IN_PROGRESS) {
+            bug.changeStatus(Status.FIXED);
+        }
+    }
+
 
     @Override
     public List<User> getUsers() {

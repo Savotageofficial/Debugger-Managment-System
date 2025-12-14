@@ -1,12 +1,12 @@
 bug2
 Favourite Logic
 Doesnt save in the database
-IN_PROGRESS
-MEDUIM
+CLOSED
+MEDIUM
 tes1
 null
 pro2
 null
-null
-com1
+2025-12-14 01:09:00
+com1,com2,com3,com4,com5,com6
 att1

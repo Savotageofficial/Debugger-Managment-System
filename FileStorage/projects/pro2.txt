@@ -3,4 +3,4 @@ capsule
 an application for treating patients
 favourites button doesn't work
 dev1
-bug1,bug2
+bug1,bug2,bug4

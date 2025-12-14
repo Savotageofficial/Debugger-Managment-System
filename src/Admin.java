@@ -21,7 +21,7 @@ public class Admin extends User {
         lines.add("developer");
         lines.add(" ");
         lines.add(" ");
-        FilesStorage.writefile("developer", lines, id + ".txt");
+        FilesStorage.writefile("developer", lines, id);
     }
 
     public void creattester(String username, String email, String password, String Usertype) {
@@ -35,7 +35,7 @@ public class Admin extends User {
         lines.add(password);
         lines.add("tester");
 
-        FilesStorage.writefile("tester", lines, id + ".txt");
+        FilesStorage.writefile("tester", lines, id);
     }
 
 
@@ -50,7 +50,7 @@ public class Admin extends User {
         lines.add(" ");
         lines.add(" ");
 
-        FilesStorage.writefile("projects", lines, projectId + ".txt");
+        FilesStorage.writefile("projects", lines, projectId);
     }
 
     public void deletproject(String projectid) {
