@@ -11,13 +11,11 @@ public class Tester extends User {
     public Tester() {
     }
 
-    public void reportBug(String projectID, String title, String description, Severity severity) {
-        if (projectID == null) {
+    public void reportBug(Project project, String title, String description, Severity severity , List<Comment> comments , List<Attachment> attachments) {
+        if (project == null) {
             throw new IllegalArgumentException("Project cannot be null");
         }
 
-        List<String> projectfile = FilesStorage.readlines("projects/" + projectID + ".txt");
-        Project project = new Project(projectID , projectfile.get(1) , projectfile.get(2) , projectfile.get(3) , List.of(projectfile.get(4).split(",")), List.of(projectfile.get(5).split(",")));
         BugReport bugreport = new BugReport(
                 Auth.generateID("bug"),
                 title,
@@ -27,12 +25,12 @@ public class Tester extends User {
                 this,
                 null,
                 project,
-                null,
-                null
+                comments,
+                attachments
         );
 //        project.addBugReport(bug);
 
-        List<String> bugs = List.of(FilesStorage.readline("projects/" + projectID + ".txt" , 5).split(","));
+        List<String> bugs = project.getBugsid();
 
         bugs.add(bugreport.getID());
         StringBuilder newline = new StringBuilder("");
@@ -43,13 +41,9 @@ public class Tester extends User {
 
         newline.deleteCharAt(newline.length() -1);
 
-        FilesStorage.writeline("projects/" + projectID + ".txt" , 5 , newline.toString());
+        FilesStorage.writeline("projects/" + project.getID() + ".txt" , 5 , newline.toString());
 
-        List<String> bugreportStringList;
-        bugreportStringList = List.of(bugreport.getID() , bugreport.getTitle() , bugreport.getDescription() , bugreport.getReporter().getID() , bugreport.getAssignee().getID() , bugreport.getAssignedProject().getID() , bugreport.getDateCreated().toString() , bugreport.getDateUpdated().toString());
-
-
-        FilesStorage.writefile("BugReports" , bugreportStringList , bugreport.getID());
+        FilesStorage.createBugFile(bugreport);
     }
 
 

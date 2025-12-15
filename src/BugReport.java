@@ -19,7 +19,7 @@ public class BugReport {
     private LocalDateTime dateUpdated; //9 excellent
     private List<Comment> comments = new ArrayList<>(); //10 nice , i changed the type of the comments to LIST<> since it has more functions and allows us to switch between List types not just ArrayList
     private List<Attachment> attachments = new ArrayList<>(); //11 nice , same thing here too
-    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public BugReport(String id,
                      String title,
@@ -122,11 +122,13 @@ public class BugReport {
         StringBuilder commentsString = new StringBuilder("");
 
         for (Comment com : comments){
-            commentsString.append(com.getId());
+            commentsString.append(com.getId() + ",");
         }
-        FilesStorage.writeline("bugreports" + ID + ".txt" , 10 , commentsString.toString());
+
+        commentsString.deleteCharAt(commentsString.length() - 1);
+        FilesStorage.writeline("bugreports/" + ID + ".txt" , 10 , commentsString.toString());
         this.dateUpdated = LocalDateTime.now();
-        FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
+        FilesStorage.writeline("bugreports/" + ID + ".txt" , 9 , dateUpdated.format(format));
     } //EXCELLENT , i would've done it in another way but this is way better!
 
     public void addAttachment(Attachment attachment) {
@@ -136,6 +138,7 @@ public class BugReport {
     public void changeStatus(Status newStatus){
         this.status= newStatus;
         this.dateUpdated=LocalDateTime.now();
+        FilesStorage.writeline("bugreports/" + ID + ".txt" , 3 , newStatus.name());
     } // Perfect , although, this collides with the status setter so you should remove the setter above
     public void assignTo(Developer developer){
         this.assignee=developer;
