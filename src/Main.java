@@ -41,18 +41,45 @@ public class Main {
 
 
 
-        if (u.UserType.equalsIgnoreCase("admin")){
-            System.out.println("awaiting admin flowchart & completion of class\n");
-            for (int i = 0; i <= 100; i++) {
-                printProgressBar(i, 100);
-                // Simulate work being done
-                Thread.sleep(50);
+        if (u.UserType.equalsIgnoreCase("admin")) {
+
+            int choice = -1;
+
+            while (choice != 0) {
+
+                System.out.println("\n ADMIN MENU ");
+                System.out.println("1- Create Project");
+                System.out.println("2- View Projects");
+                System.out.println("3- Generate Report");
+                System.out.println("4- Assign Bug To Project");
+                System.out.println("0- Logout");
+
+                System.out.print("Choice: ");
+                choice = input.nextInt();
+                input.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Create Project");
+                        break;
+                    case 2:
+                        System.out.println("View Projects");
+                        break;
+                    case 3:
+                        System.out.println("Generate Report");
+                        break;
+                    case 4:
+                        System.out.println("Assign Bug");
+                        break;
+                    case 0:
+                        System.out.println("Logout");
+                        break;
+                }
             }
 
-            System.out.println("exiting!");
-            Thread.sleep(10);
 
-        } else if (u.UserType.equalsIgnoreCase("developer") || u instanceof Developer) {
+
+    } else if (u.UserType.equalsIgnoreCase("developer") || u instanceof Developer) {
             Developer dev = (Developer) u;
 
             List<String> projectsIDs = dev.getAssignedProjectsIDs();
