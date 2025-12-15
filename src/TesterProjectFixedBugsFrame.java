@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,7 @@ public class TesterProjectFixedBugsFrame extends JFrame {
         setSize(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
         JLabel welcomeLabel1 = new JLabel(
                 "Selected Project: " + project.getName(),
@@ -26,81 +26,75 @@ public class TesterProjectFixedBugsFrame extends JFrame {
         );
         welcomeLabel1.setFont(new Font("Arial", Font.BOLD, 18));
 
-
-
-//        JButton manageUsersBtn = new JButton("Manage Users");
-//        JButton manageProjectsBtn = new JButton("Manage Projects");
-
-        JPanel btnPanel = new JPanel();
-
         JPanel bugnames = new JPanel();
-        bugnames.setLayout(new BoxLayout(bugnames , BoxLayout.Y_AXIS));
+        bugnames.setLayout(new BoxLayout(bugnames, BoxLayout.Y_AXIS));
 
-        JPanel logoutpanel = new JPanel();
-        logoutpanel.setLayout(new BoxLayout(logoutpanel , BoxLayout.X_AXIS));
-
-        JPanel allbtnPanel = new JPanel();
-
-
-        allbtnPanel.setLayout(new BoxLayout(allbtnPanel , BoxLayout.Y_AXIS));
-        List<BugReport> bugReports = new ArrayList<BugReport>();
-
-
-
-
-//        Border emptyBorder = BorderFactory.createEmptyBorder(30, 20, 30, 20);
+        JPanel bugnamesWrapper = new JPanel(new BorderLayout());
+        bugnamesWrapper.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
+        bugnamesWrapper.add(bugnames, BorderLayout.NORTH);
 
         JLabel bugListTitle = new JLabel("FIXED BUG REPORTS : ");
         bugListTitle.setFont(new Font("Verdana", Font.BOLD, 18));
+        bugListTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        List<BugReport> bugReports = new ArrayList<>();
 
         for (String bugid : project.getBugsid()) {
             BugReport bug = FilesStorage.fetchBugData(bugid);
-            if(bug.getStatus() == Status.FIXED) {
+            if (bug.getStatus() == Status.FIXED) {
                 bugReports.add(bug);
             }
         }
-        if (bugReports.toArray().length == 0){
+
+        if (bugReports.isEmpty()) {
             bugListTitle.setText("THERE ARE NO FIXED BUGS FOR THIS PROJECT");
             bugListTitle.setFont(new Font("Verdana", Font.BOLD, 12));
             bugListTitle.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
-
         }
-
-
 
         bugnames.add(bugListTitle);
         bugnames.add(Box.createVerticalStrut(10));
-        for (BugReport bug : bugReports){
+
+        for (BugReport bug : bugReports) {
+            JPanel bugcontainer = new JPanel(new BorderLayout());
+            bugcontainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+            bugcontainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             JLabel bugtitle = new JLabel(bug.getTitle());
             bugtitle.setFont(new Font("Verdana", Font.PLAIN, 15));
-            bugnames.add(bugtitle);
 
+            JButton verifybtn = new JButton("verify bug fix");
+
+            verifybtn.addActionListener(e ->{
+                tester.verifyBug(bug , Status.CLOSED);
+            });
+
+            bugcontainer.add(bugtitle, BorderLayout.WEST);
+            bugcontainer.add(verifybtn, BorderLayout.EAST);
+
+            bugnames.add(bugcontainer);
+            bugnames.add(Box.createVerticalStrut(5));
         }
+
         JButton logoutBtn = new JButton("Logout");
         JButton backbtn = new JButton("Back");
 
-        logoutpanel.add(logoutBtn);
-        logoutpanel.add(backbtn);
-
-//        btnPanel.add(manageUsersBtn);
-//        btnPanel.add(manageProjectsBtn);
-
-
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        bottomPanel.add(logoutBtn);
+        bottomPanel.add(backbtn);
 
         add(welcomeLabel1, BorderLayout.NORTH);
-        add(bugnames , BorderLayout.WEST);
-        allbtnPanel.add(btnPanel);
-        allbtnPanel.add(logoutpanel , BorderLayout.SOUTH);
-        add(allbtnPanel);
+        add(bugnamesWrapper, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         logoutBtn.addActionListener(e -> {
             dispose();
             new LoginFrame().setVisible(true);
         });
+
         backbtn.addActionListener(e -> {
             previousFrame.setVisible(true);
             dispose();
         });
     }
 }
-

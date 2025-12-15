@@ -28,9 +28,6 @@ public class TesterProjectBugsFrame extends JFrame {
 
 
 
-//        JButton manageUsersBtn = new JButton("Manage Users");
-//        JButton manageProjectsBtn = new JButton("Manage Projects");
-
         JPanel btnPanel = new JPanel();
 
         JPanel bugnames = new JPanel();
@@ -64,35 +61,55 @@ public class TesterProjectBugsFrame extends JFrame {
         bugnames.add(Box.createVerticalStrut(10));
 
         for (BugReport bug : bugReports){
+            JPanel bugcontainer = new JPanel(new BorderLayout(20, 0));
+            bugcontainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+            bugcontainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             JLabel bugtitle = new JLabel(bug.getTitle());
             bugtitle.setFont(new Font("Verdana", Font.PLAIN, 15));
-            bugnames.add(bugtitle);
+
+            JLabel Status = new JLabel(bug.getStatus().name());
+
+            bugcontainer.add(bugtitle, BorderLayout.WEST);
+
+            bugcontainer.add(Box.createHorizontalStrut(20), BorderLayout.CENTER);
+
+            bugcontainer.add(Status, BorderLayout.EAST);
+
+            bugnames.add(bugcontainer);
+            bugnames.add(Box.createVerticalStrut(5));
 
         }
+
         JButton logoutBtn = new JButton("Logout");
         JButton backbtn = new JButton("Back");
+
         JButton ReportBugbtn = new JButton("Report Bug");
         JButton VerifyBugFixbtn = new JButton("Verify Bug Fix");
+
         logoutpanel.add(logoutBtn);
         logoutpanel.add(backbtn);
 
-//        btnPanel.add(manageUsersBtn);
-//        btnPanel.add(manageProjectsBtn);
+
 
         choices.setBorder(emptyBorder);
         choices.add(ReportBugbtn);
         choices.add(Box.createVerticalStrut(10));
         choices.add(VerifyBugFixbtn);
 
-
+        setLayout(new BorderLayout());
         add(welcomeLabel1, BorderLayout.NORTH);
         add(bugnames , BorderLayout.WEST);
-        allbtnPanel.add(btnPanel);
-        allbtnPanel.add(logoutpanel , BorderLayout.SOUTH);
-        add(allbtnPanel);
+
+
+
+        add(logoutpanel, BorderLayout.SOUTH);
 
         add(choices , BorderLayout.EAST);
+
+        bugnames.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 10));
+        choices.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 20));
+
         logoutBtn.addActionListener(e -> {
             dispose();
             new LoginFrame().setVisible(true);
@@ -113,4 +130,3 @@ public class TesterProjectBugsFrame extends JFrame {
         });
     }
 }
-

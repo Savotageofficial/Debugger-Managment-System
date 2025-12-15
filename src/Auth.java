@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Auth {
+public abstract class Auth {
 
 
     public static User Login(String email, String password) {
