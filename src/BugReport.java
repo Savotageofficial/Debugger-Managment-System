@@ -188,4 +188,9 @@ public class BugReport {
         return bugReports;
 
     }
+    @Override
+    public String toString() {
+        return title + " | " + status + " | " + severity;
+    }
+
 }

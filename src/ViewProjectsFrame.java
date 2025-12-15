@@ -16,7 +16,7 @@ public class ViewProjectsFrame extends JFrame {
         setSize(600, 400);
         setLocationRelativeTo(null);
 
-        // Table columns
+
         model = new DefaultTableModel();
         model.addColumn("Project ID");
         model.addColumn("Name");
