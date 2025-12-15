@@ -11,8 +11,10 @@ public class Auth {
         User u = null;
         Admin adm = new Admin();
         Developer dev = new Developer();
+        Tester tes = new Tester();
         List<User> devs = dev.getUsers();
         List<User> adms = adm.getUsers();
+        List<User> tess = tes.getUsers();
 
         if (u == null) {
             for (User user : devs) {
@@ -25,6 +27,14 @@ public class Auth {
 
         if (u == null){
             for(User user : adms){
+                if (user.Email.equalsIgnoreCase(email) && user.getPassword().equalsIgnoreCase(password)){
+                    u = user;
+                    break;
+                }
+            }
+        }
+        if (u == null){
+            for(User user : tess){
                 if (user.Email.equalsIgnoreCase(email) && user.getPassword().equalsIgnoreCase(password)){
                     u = user;
                     break;
@@ -86,7 +96,7 @@ public class Auth {
             sortByLastNumber(bugIds);
 
 
-            return "bug" + extractNumber(bugIds.getLast()) + 1;
+            return "bug" + (extractNumber(bugIds.getLast()) + 1);
         }
         if (Type.equalsIgnoreCase("project")){
             Project project = new Project();

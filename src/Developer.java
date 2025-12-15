@@ -73,11 +73,19 @@ public class Developer extends User {
         assignedBugsIDs.remove(bug);
         StringBuilder newliststring = new StringBuilder("");
 
-        for(String bugid : assignedBugsIDs){
-            newliststring.append(bugid + ",");
+    public void updateBugStatus(BugReport bug){
+        Status status = bug.getStatus();
+        if (status == Status.NEW){
+            bug.changeStatus(Status.IN_PROGRESS);
+
+        } else if (status == Status.ASSIGNED) {
+            bug.changeStatus(Status.IN_PROGRESS);
+
+        } else if (status == Status.IN_PROGRESS) {
+            bug.changeStatus(Status.FIXED);
         }
-        newliststring.deleteCharAt(newliststring.length() -1);
-        FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
+    }
+
 
     }
     @Override
@@ -89,14 +97,7 @@ public class Developer extends User {
 
         if (files != null) {
             for (File file : files) {
-                Users.add(new Developer(
-                        FilesStorage.readline("developer/" + file.getName() , 0),
-                        FilesStorage.readline("developer/" + file.getName() , 1),
-                        FilesStorage.readline("developer/" + file.getName() , 2),
-                        FilesStorage.readline("developer/" + file.getName() , 3),
-                        List.of(FilesStorage.readline("developer/" + file.getName() , 5).split(",")),
-                        List.of(FilesStorage.readline("developer/" + file.getName() , 6).split(","))
-                ));
+                Users.add(FilesStorage.fetchDeveloper(file.getName().replace(".txt" , "")));
             }
         }
 
