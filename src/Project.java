@@ -10,7 +10,7 @@ public class Project {
     private String description;
     private String BugSummary;
     private List<String> developersID = new ArrayList<String>();
-    private List<String> bugsid=new ArrayList<>();
+    private List<String> bugsid= new ArrayList<>();
 
  public Project(String ID, String name, String description , String bugSummary, List<String> developersID , List<String> bugsid) {
      this.ID = ID;
@@ -99,14 +99,7 @@ public class Project {
         if (files != null) {
             for (File file : files) {
 
-                projects.add(new Project(
-                        FilesStorage.readline("projects/" + file.getName() , 0),
-                        FilesStorage.readline("projects/" + file.getName() , 1),
-                        FilesStorage.readline("project/" + file.getName() , 2),
-                        FilesStorage.readline("project/" + file.getName() , 3),
-                        List.of(FilesStorage.readline("projects/" + file.getName() , 4).split(",")),
-                        List.of(FilesStorage.readline("projects/" + file.getName() , 5).split(","))
-                ));
+                projects.add(FilesStorage.fetchProjectData(file.getName().replace(".txt" , "")));
             }
         }
 

@@ -1,12 +1,12 @@
-bug2
-Favourite Logic
+bug3
+flow inconsistent
 Doesnt save in the database
-CLOSED
+IN_PROGRESS
 MEDIUM
 tes1
 null
-pro2
+pro1
 null
 2025-12-14 01:09:00
-com1,com2,com3,com4,com5,com6
+null
 att1

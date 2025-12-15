@@ -1,16 +1,24 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Comment {
     private String id;
     private String text;
     private LocalDateTime dateCreated;
-    private User author;
+    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private String authorid;
 
-    public Comment(String id, String text, User author) {
+    public Comment(String id, String text, String author) {
         this.id = id;
         this.text = text;
-        this.author = author;
+        this.authorid = author;
         this.dateCreated = LocalDateTime.now();
+    }
+    public Comment(String id, String text, String datecreated , String author) {
+        this.id = id;
+        this.text = text;
+        this.authorid = author;
+        this.dateCreated = LocalDateTime.parse(datecreated, format);
     }
 
     public String getId() {
@@ -42,13 +50,13 @@ public class Comment {
         this.dateCreated = dateCreated;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
 
-        return author;
+        return authorid;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
 
-        this.author = author;
+        this.authorid = author;
     }
 }
