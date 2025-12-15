@@ -44,6 +44,9 @@ public class LoginFrame extends JFrame {
 
             if (user instanceof Admin) {
                 new AdminDashboardFrame((Admin) user).setVisible(true);
+            } else if (user instanceof Tester) {
+                new TesterDashboardFrame((Tester) user).setVisible(true);
+
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Welcome " + user.Name + " (" + user.UserType + ")");
