@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +8,9 @@ public class Developer extends User {
     private List<String> assignedProjectsIDs = new ArrayList<>();
     private List<String> assignedBugsIDs = new ArrayList<>();
 
+    public Developer(String id ,String name, String email, String password) {
+        super(id ,name, email, password, "developer");
+    }
 
     public Developer(String id, String name, String email, String password, List<String> assignedProjects, List<String> assignedBugs) {
         super(id, name, email, password, "developer");
@@ -18,6 +21,12 @@ public class Developer extends User {
     public Developer() {
         super();
     }
+
+//    public Developer(String name, String email, String password) {
+//        super(name, email, password);
+//        this.userType = "Developer";
+//    }
+
 
     public List<String> getAssignedProjectsIDs() {
         return assignedProjectsIDs;
@@ -31,47 +40,23 @@ public class Developer extends User {
     public void assignProject(String projectid) {
         if (projectid != null && !assignedProjectsIDs.contains(projectid)) {
             assignedProjectsIDs.add(projectid);
-            StringBuilder newliststring = new StringBuilder("");
-
-            for(String proid : assignedProjectsIDs){
-                newliststring.append(proid + ",");
-            }
-            newliststring.deleteCharAt(newliststring.length() -1);
-            FilesStorage.writeline("developer/" + this.getID() + ".txt" , 5 , newliststring.toString());
-
         }
-
     }
 
     public void removeProject(String projectid) {
         assignedProjectsIDs.remove(projectid);
-
-        StringBuilder newliststring = new StringBuilder("");
-
-        for(String proid : assignedProjectsIDs){
-            newliststring.append(proid + ",");
-        }
-        newliststring.deleteCharAt(newliststring.length() -1);
-        FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
     }
 
 
     public void assignBug(String bugid) {
         if (bugid != null && !assignedBugsIDs.contains(bugid)) {
             assignedBugsIDs.add(bugid);
-            StringBuilder newliststring = new StringBuilder("");
-
-            for(String bugID : assignedBugsIDs){
-                newliststring.append(bugID + ",");
-            }
-            newliststring.deleteCharAt(newliststring.length() -1);
-            FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
         }
     }
 
     public void removeBug(String bug) {
         assignedBugsIDs.remove(bug);
-        StringBuilder newliststring = new StringBuilder("");
+    }
 
     public void updateBugStatus(BugReport bug){
         Status status = bug.getStatus();
@@ -87,7 +72,6 @@ public class Developer extends User {
     }
 
 
-    }
     @Override
     public List<User> getUsers() {
         String path = FilesStorage.FilePath + "developer";
