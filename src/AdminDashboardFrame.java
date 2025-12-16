@@ -23,6 +23,7 @@ public class AdminDashboardFrame extends JFrame {
                 JButton createAccountBtn = new JButton("Create Account");
                 JButton reportBtn = new JButton("Generate Report");
                 JButton assignBugBtn = new JButton("Assign Developer To Project");
+                JButton assignBug2Btn = new JButton("Assign Bug To Developer");
                 JButton logoutBtn = new JButton("Logout");
 
                 JPanel btnPanel = new JPanel(new GridLayout(6, 1, 10, 10));
@@ -33,6 +34,7 @@ public class AdminDashboardFrame extends JFrame {
                 btnPanel.add(createAccountBtn);
                 btnPanel.add(reportBtn);
                 btnPanel.add(assignBugBtn);
+                btnPanel.add(assignBug2Btn);
                 btnPanel.add(logoutBtn);
 
                 add(welcomeLabel, BorderLayout.NORTH);
@@ -48,6 +50,7 @@ public class AdminDashboardFrame extends JFrame {
                 reportBtn.addActionListener(e -> new GenerateReportFrame().setVisible(true));
 
                 assignBugBtn.addActionListener(e -> new AssignDeveloperToProjectFrame().setVisible(true));
+                assignBug2Btn.addActionListener(e -> new AssignBugToDeveloperFrame().setVisible(true));
                 logoutBtn.addActionListener(e -> {
                         dispose();
                         new LoginFrame().setVisible(true);
