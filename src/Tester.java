@@ -28,7 +28,7 @@ public class Tester extends User {
                 comments,
                 attachments
         );
-//        project.addBugReport(bug);
+
 
         List<String> bugs = project.getBugsid();
 
