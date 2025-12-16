@@ -7,16 +7,6 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         System.out.println("------BUG MANAGMENT SYSTEM-------");
-//        Project p=new Project("pro1","","");
-//        p.addDeveloper("dev4");
-
-//        User dev = new Admin();
-//        List<User> devlist = dev.getUsers();
-//        for (User developer : devlist) {
-//            System.out.println(developer.getID());
-//        }
-
-        //TODO this will be the Home Page
         Scanner input = new Scanner(System.in);
 
         System.out.print("enter your email: ");
@@ -45,7 +35,6 @@ public class Main {
             System.out.println("awaiting admin flowchart & completion of class\n");
             for (int i = 0; i <= 100; i++) {
                 printProgressBar(i, 100);
-                // Simulate work being done
                 Thread.sleep(50);
             }
 
@@ -117,28 +106,21 @@ public class Main {
     }
 
     private static void printProgressBar(int iteration, int total) {
-        int barLength = 50; // Length of the progress bar in characters
-        // Calculate the percentage completed
-        double percent = ((double) iteration / total) * 100;
-        // Calculate the number of filled characters
-        int filledLength = (int) (barLength * iteration / total);
+        int barLength = 50;
 
-        // Build the bar string
+        double percent = ((double) iteration / total) * 100;
+        int filledLength = (int) (barLength * iteration / total);
         StringBuilder bar = new StringBuilder();
         for (int i = 0; i < barLength; i++) {
             if (i < filledLength) {
-                bar.append("█"); // Use block character
+                bar.append("█");
             } else {
                 bar.append("-");
             }
         }
-
-        // Print the progress bar on the same line using carriage return (\r)
         String progress = String.format("\rProgress: |%s| %.1f%% (%d/%d)",
                 bar.toString(), percent, iteration, total);
         System.out.print(progress);
-
-        // Ensure the output is flushed immediately
         System.out.flush();
-    } //can be removed safely
+    }
 }

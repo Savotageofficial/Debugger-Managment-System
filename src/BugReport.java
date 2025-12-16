@@ -7,18 +7,18 @@ import java.util.List;
 
 public class BugReport {
 
-    private String ID; //0 basic
-    private String title; //1 basic
-    private String description; //2 basic
-    private Status status; //3 nice , enum missing
-    private Severity severity; //4 nice , enum missing
-    private Tester reporter; //5 nice , tester class missing
-    private Developer assignee;//6 nice
-    private Project assignedProject; //7 nice
-    private LocalDateTime dateCreated; //8 excellent
-    private LocalDateTime dateUpdated; //9 excellent
-    private List<Comment> comments = new ArrayList<>(); //10 nice , i changed the type of the comments to LIST<> since it has more functions and allows us to switch between List types not just ArrayList
-    private List<Attachment> attachments = new ArrayList<>(); //11 nice , same thing here too
+    private String ID;
+    private String title;
+    private String description;
+    private Status status;
+    private Severity severity;
+    private Tester reporter;
+    private Developer assignee;
+    private Project assignedProject;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateUpdated;
+    private List<Comment> comments = new ArrayList<>();
+    private List<Attachment> attachments = new ArrayList<>();
     private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public BugReport(String id,
