@@ -22,10 +22,7 @@ public class Developer extends User {
         super();
     }
 
-//    public Developer(String name, String email, String password) {
-//        super(name, email, password);
-//        this.userType = "Developer";
-//    }
+
 
 
     public List<String> getAssignedProjectsIDs() {

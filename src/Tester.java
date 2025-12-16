@@ -28,7 +28,7 @@ public class Tester extends User {
                 project,
                 comments,
                 attachments);
-        // project.addBugReport(bug);
+
 
         List<String> bugs = project.getBugsid();
 
@@ -36,7 +36,7 @@ public class Tester extends User {
             bugs = new ArrayList<>();
         }
 
-        // Filter out "null" string values
+
         List<String> cleanBugs = new ArrayList<>();
         for (String b : bugs) {
             if (b != null && !b.equalsIgnoreCase("null") && !b.trim().isEmpty()) {

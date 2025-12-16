@@ -38,7 +38,7 @@ public class AdminDashboardFrame extends JFrame {
                 add(welcomeLabel, BorderLayout.NORTH);
                 add(btnPanel, BorderLayout.CENTER);
 
-                // Actions
+
                 createProjectBtn.addActionListener(e -> new CreateProjectFrame(admin).setVisible(true));
 
                 viewProjectsBtn.addActionListener(e -> new ViewProjectsFrame(admin).setVisible(true));

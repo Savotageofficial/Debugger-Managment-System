@@ -21,8 +21,7 @@ public class TesterDashboardFrame extends JFrame {
         );
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
-//        JButton manageUsersBtn = new JButton("Manage Users");
-//        JButton manageProjectsBtn = new JButton("Manage Projects");
+
 
         Project pro = new Project();
         List<Project> projects = pro.getProjects();
@@ -46,8 +45,7 @@ public class TesterDashboardFrame extends JFrame {
         JButton logoutBtn = new JButton("Logout");
         logoutpanel.add(logoutBtn);
 
-//        btnPanel.add(manageUsersBtn);
-//        btnPanel.add(manageProjectsBtn);
+
 
 
         add(welcomeLabel, BorderLayout.NORTH);

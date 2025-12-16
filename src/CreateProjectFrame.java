@@ -12,8 +12,7 @@ public class CreateProjectFrame extends JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
 
-//        JLabel idLabel = new JLabel("Project ID:");
-//        JTextField idField = new JTextField();
+
 
         JLabel nameLabel = new JLabel("Project Name:");
         JTextField nameField = new JTextField();
@@ -26,8 +25,7 @@ public class CreateProjectFrame extends JFrame {
         JPanel panel = new JPanel(new GridLayout(7, 1, 5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-//        panel.add(idLabel);
-//        panel.add(idField);
+
         panel.add(nameLabel);
         panel.add(nameField);
         panel.add(descLabel);

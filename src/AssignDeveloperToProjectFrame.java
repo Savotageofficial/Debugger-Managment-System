@@ -88,7 +88,7 @@ public class AssignDeveloperToProjectFrame extends JFrame {
             return;
         }
 
-        // Update project's developer list
+
         String developersLine = FilesStorage.readline("projects/" + projectId + ".txt", 4);
 
         if (developersLine == null || developersLine.trim().isEmpty() || developersLine.equalsIgnoreCase("null")) {
@@ -104,7 +104,7 @@ public class AssignDeveloperToProjectFrame extends JFrame {
             FilesStorage.writeline("projects/" + projectId + ".txt", 4, developersLine);
         }
 
-        // Update developer's project list
+
         String projectsLine = FilesStorage.readline("developer/" + developerId + ".txt", 5);
 
         if (projectsLine == null || projectsLine.trim().isEmpty() || projectsLine.equalsIgnoreCase("null")) {

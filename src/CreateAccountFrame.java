@@ -54,7 +54,7 @@ public class CreateAccountFrame extends JFrame {
                 return;
             }
 
-            // Check if email already exists
+
             if (emailExists(email)) {
                 JOptionPane.showMessageDialog(this, "An account with this email already exists!");
                 return;
@@ -78,7 +78,7 @@ public class CreateAccountFrame extends JFrame {
     }
 
     private boolean emailExists(String email) {
-        // Check developers
+
         Developer dev = new Developer();
         for (User user : dev.getUsers()) {
             if (user.Email.equalsIgnoreCase(email)) {
@@ -86,7 +86,7 @@ public class CreateAccountFrame extends JFrame {
             }
         }
 
-        // Check testers
+
         Tester tes = new Tester();
         for (User user : tes.getUsers()) {
             if (user.Email.equalsIgnoreCase(email)) {
@@ -94,7 +94,7 @@ public class CreateAccountFrame extends JFrame {
             }
         }
 
-        // Check admins
+
         Admin adm = new Admin();
         for (User user : adm.getUsers()) {
             if (user.Email.equalsIgnoreCase(email)) {

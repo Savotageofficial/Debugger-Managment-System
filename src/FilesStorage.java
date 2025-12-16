@@ -43,7 +43,7 @@ public abstract class FilesStorage {
 
     public static void SaveUserData(User user) {
 
-        // todo(waiting for developer & admin & tester classes)
+
     }
 
     public static Project fetchProjectData(String projectid) {
