@@ -3,5 +3,5 @@ safwat
 mohamedsafwat@gmail.com
 123456
 developer
-pro1,pro2
+pro1
 bug1

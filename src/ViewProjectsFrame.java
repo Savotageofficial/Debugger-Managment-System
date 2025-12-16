@@ -124,6 +124,7 @@ public class ViewProjectsFrame extends JFrame {
         }
 
         String projectId = model.getValueAt(row, 0).toString();
+        Project project = FilesStorage.fetchProjectData(projectId);
 
         int confirm = JOptionPane.showConfirmDialog(
                 this,
@@ -132,6 +133,12 @@ public class ViewProjectsFrame extends JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
+            List<String> devs = project.getDevelopersID();
+            for(String devid : devs){
+                Developer dev = FilesStorage.fetchDeveloper(devid);
+                dev.removeProject(projectId);
+            }
+
             admin.deletproject(projectId);
             model.removeRow(row);
         }

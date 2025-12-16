@@ -37,23 +37,45 @@ public class Developer extends User {
     public void assignProject(String projectid) {
         if (projectid != null && !assignedProjectsIDs.contains(projectid)) {
             assignedProjectsIDs.add(projectid);
+            StringBuilder newliststring = new StringBuilder("");
+
+            for(String proid : assignedProjectsIDs){
+                newliststring.append(proid + ",");
+            }
+            newliststring.deleteCharAt(newliststring.length() -1);
+            FilesStorage.writeline("developer/" + this.getID() + ".txt" , 5 , newliststring.toString());
+
         }
+
     }
 
     public void removeProject(String projectid) {
         assignedProjectsIDs.remove(projectid);
+
+        StringBuilder newliststring = new StringBuilder("");
+
+        for(String proid : assignedProjectsIDs){
+            newliststring.append(proid + ",");
+        }
+        newliststring.deleteCharAt(newliststring.length() -1);
+        FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
     }
 
 
     public void assignBug(String bugid) {
         if (bugid != null && !assignedBugsIDs.contains(bugid)) {
             assignedBugsIDs.add(bugid);
+            StringBuilder newliststring = new StringBuilder("");
+
+            for(String bugID : assignedBugsIDs){
+                newliststring.append(bugID + ",");
+            }
+            newliststring.deleteCharAt(newliststring.length() -1);
+            FilesStorage.writeline("developer/" + this.getID() + ".txt", 5,newliststring.toString());
         }
     }
 
-    public void removeBug(String bug) {
-        assignedBugsIDs.remove(bug);
-    }
+
 
     public void updateBugStatus(BugReport bug){
         Status status = bug.getStatus();
