@@ -24,7 +24,11 @@ public class Project {
     public Project() {
     }
 
-     public String getID() {
+    public void setBugSummary(String bugSummary) {
+        BugSummary = bugSummary;
+    }
+
+    public String getID() {
      return ID;
  }
      public String getName() {
@@ -46,27 +50,6 @@ public class Project {
         return bugsid;
     }
 
-    public void readProjectsInfo() {
-        try (FileReader fr = new FileReader("src/Projects.txt");
-             BufferedReader bf = new BufferedReader(fr)) {
-
-            String line;
-
-            while ((line = bf.readLine()) != null) {
-
-                String parts[] =line.split(",");
-                String fileID = parts[0];
-                if(fileID.equals(ID)){
-                    name = parts[1];
-                    description = parts[2];
-                }
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
 
     public void addDeveloper(String dev){
 
@@ -107,6 +90,10 @@ public class Project {
 
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 
 
 }

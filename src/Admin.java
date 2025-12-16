@@ -19,15 +19,14 @@ public class Admin extends User {
         lines.add(email);
         lines.add(password);
         lines.add("developer");
-        lines.add(" ");
-        lines.add(" ");
+        lines.add("null");
+        lines.add("null");
         FilesStorage.writefile("developer", lines, id);
     }
 
     public void creattester(String username, String email, String password, String Usertype) {
         String id = Auth.generateID("tester");
         List<String> lines = new ArrayList<>();
-
 
         lines.add(id);
         lines.add(username);
@@ -38,6 +37,16 @@ public class Admin extends User {
         FilesStorage.writefile("tester", lines, id);
     }
 
+    public void creatadmin(String username, String email, String password) {
+        String id = Auth.generateID("admin");
+        List<String> lines = new ArrayList<>();
+        lines.add(id);
+        lines.add(username);
+        lines.add(email);
+        lines.add(password);
+        lines.add("admin");
+        FilesStorage.writefile("admin", lines, id);
+    }
 
     public void createProject(String projectId, String name, String description) {
 
@@ -46,9 +55,9 @@ public class Admin extends User {
         lines.add(projectId);
         lines.add(name);
         lines.add(description);
-        lines.add(" ");
-        lines.add(" ");
-        lines.add(" ");
+        lines.add("null");
+        lines.add("null");
+        lines.add("null");
 
         FilesStorage.writefile("projects", lines, projectId);
     }
@@ -56,13 +65,11 @@ public class Admin extends User {
     public void deletproject(String projectid) {
         List<String> bugsid = List.of(FilesStorage.readline("projects/" + projectid + ".txt", 5).split(","));
 
-        for (String bugid : bugsid){
+        for (String bugid : bugsid) {
             FilesStorage.deletefile("bugreports/" + bugid + ".txt");
         }
         FilesStorage.deletefile("projects/" + projectid + ".txt");
     }
-
-
 
     @Override
     public List<User> getUsers() {
@@ -77,8 +84,7 @@ public class Admin extends User {
                         FilesStorage.readline("admin/" + file.getName(), 0),
                         FilesStorage.readline("admin/" + file.getName(), 1),
                         FilesStorage.readline("admin/" + file.getName(), 2),
-                        FilesStorage.readline("admin/" + file.getName(), 3)
-                ));
+                        FilesStorage.readline("admin/" + file.getName(), 3)));
             }
         }
 

@@ -22,15 +22,15 @@ public class BugReport {
     public static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public BugReport(String id,
-                     String title,
-                     String description,
-                     Status status,
-                     Severity severity,
-                     Tester reporter,
-                     Developer assignee,
-                     Project assignedProject,
-                     List<Comment> comments,
-                     List<Attachment> attachments) {
+            String title,
+            String description,
+            Status status,
+            Severity severity,
+            Tester reporter,
+            Developer assignee,
+            Project assignedProject,
+            List<Comment> comments,
+            List<Attachment> attachments) {
 
         this.ID = id;
         this.title = title;
@@ -65,7 +65,7 @@ public class BugReport {
     public void setDescription(String description) {
         this.description = description;
         this.dateUpdated = LocalDateTime.now();
-        FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
+        FilesStorage.writeline("bugreports" + ID + ".txt", 9, dateUpdated.format(format));
 
     }
 
@@ -80,7 +80,7 @@ public class BugReport {
     public void setSeverity(Severity severity) {
         this.severity = severity;
         this.dateUpdated = LocalDateTime.now();
-        FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
+        FilesStorage.writeline("bugreports" + ID + ".txt", 9, dateUpdated.format(format));
 
     }
 
@@ -118,15 +118,18 @@ public class BugReport {
     }
 
     public void addComment(Comment comment) {
+        if (comments == null) {
+            comments = new ArrayList<>();
+        }
         comments.add(comment);
         StringBuilder commentsString = new StringBuilder("");
 
-        for (Comment com : comments){
+        for (Comment com : comments) {
             commentsString.append(com.getId() + ",");
         }
 
         commentsString.deleteCharAt(commentsString.length() - 1);
-        FilesStorage.writeline("bugreports/" + ID + ".txt" , 10 , commentsString.toString());
+        FilesStorage.writeline("bugreports/" + ID + ".txt", 10, commentsString.toString());
         this.dateUpdated = LocalDateTime.now();
         FilesStorage.writeline("bugreports/" + ID + ".txt" , 9 , dateUpdated.format(format));
     }
@@ -152,8 +155,6 @@ public class BugReport {
         File directory = new File(path);
         File[] files = directory.listFiles();
 
-
-
         if (files != null) {
             for (File file : files) {
                 List<String> testerlist = FilesStorage.readlines("tester/" + FilesStorage.readline("bugreports/" + file.getName() , 5) + ".txt");
@@ -168,4 +169,10 @@ public class BugReport {
         return bugReports;
 
     }
+
+    @Override
+    public String toString() {
+        return title + " | " + status + " | " + severity;
+    }
+
 }
