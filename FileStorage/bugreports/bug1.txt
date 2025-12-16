@@ -1,12 +1,12 @@
 bug1
 testing bug
 testing
-NEW
+CLOSED
 LOW
 tes1
 null
 pro1
 2025-12-16 03:27:35
-2025-12-16 03:27:35
-null
+2025-12-16 11:35:36
+com2
 null
