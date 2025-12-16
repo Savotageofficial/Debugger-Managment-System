@@ -40,55 +40,55 @@ public class BugReport {
         this.assignedProject = assignedProject;
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
-    } //perfect , just remove assignee from here since it can be null as it is **optional**
+    }
 
     public BugReport() {
     }
 
     public String getID() {
         return ID;
-    } //perfect
+    }
 
 
     public String getTitle() {
         return title;
-    } //perfect
+    }
 
     public String getDescription() {
         return description;
-    } //perfect
+    }
 
     public void setDescription(String description) {
         this.description = description;
         this.dateUpdated = LocalDateTime.now();
         FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
 
-    } //perfect
+    }
 
     public Status getStatus() {
         return status;
-    } //perfect
+    }
 
     public Severity getSeverity() {
         return severity;
-    } // perfect
+    }
 
     public void setSeverity(Severity severity) {
         this.severity = severity;
         this.dateUpdated = LocalDateTime.now();
         FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
 
-    } //perfect
+    }
 
     public Tester getReporter() {
         return reporter;
-    } // perfect
+    }
 
     public void setReporter(Tester reporter) {
         this.reporter = reporter;
         this.dateUpdated = LocalDateTime.now();
-    } //this will set the new reporter if the bug fix gets denied , excellent work
-
+        FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
+    }
     public Developer getAssignee() {
         return assignee;
     } //perfect
@@ -123,21 +123,22 @@ public class BugReport {
         FilesStorage.writeline("bugreports" + ID + ".txt" , 10 , commentsString.toString());
         this.dateUpdated = LocalDateTime.now();
         FilesStorage.writeline("bugreports" + ID + ".txt" , 9 , dateUpdated.format(format));
-    } //EXCELLENT , i would've done it in another way but this is way better!
+    }
 
     public void addAttachment(Attachment attachment) {
         attachments.add(attachment);
         this.dateUpdated = LocalDateTime.now();
-    } // same excellence as addComment function , nice
+    }
     public void changeStatus(Status newStatus){
         this.status= newStatus;
         this.dateUpdated=LocalDateTime.now();
-    } // Perfect , although, this collides with the status setter so you should remove the setter above
+    }
     public void assignTo(Developer developer){
         this.assignee=developer;
         this.dateUpdated = LocalDateTime.now();
         this.status= Status.ASSIGNED;
-    } //perfecto
+
+    }
 
     public List<BugReport> getBugReports() {
         String path = FilesStorage.FilePath + "bugreports";
