@@ -187,9 +187,9 @@ public class Main {
                             System.out.println("Email already exists!");
                         } else {
                             if (typeC == 1)
-                                ((Admin) u).creatdeveloper(n, e, newPass, "developer");
+                                ((Admin) u).creatdeveloper(n, e, newPass);
                             else if (typeC == 2)
-                                ((Admin) u).creattester(n, e, newPass, "tester");
+                                ((Admin) u).creattester(n, e, newPass);
                             else if (typeC == 3)
                                 ((Admin) u).creatadmin(n, e, newPass);
                             System.out.println("Account created.");

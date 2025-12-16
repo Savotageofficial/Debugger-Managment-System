@@ -62,10 +62,10 @@ public class CreateAccountFrame extends JFrame {
 
             switch (type) {
                 case "Developer":
-                    admin.creatdeveloper(name, email, password, "developer");
+                    admin.creatdeveloper(name, email, password);
                     break;
                 case "Tester":
-                    admin.creattester(name, email, password, "tester");
+                    admin.creattester(name, email, password);
                     break;
                 case "Admin":
                     admin.creatadmin(name, email, password);

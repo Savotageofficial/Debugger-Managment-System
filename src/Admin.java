@@ -11,7 +11,7 @@ public class Admin extends User {
     public Admin() {
     }
 
-    public void creatdeveloper(String username, String email, String password, String Usertype) {
+    public void creatdeveloper(String username, String email, String password) {
         String id = Auth.generateID("developer");
         List<String> lines = new ArrayList<>();
         lines.add(id);
@@ -24,7 +24,7 @@ public class Admin extends User {
         FilesStorage.writefile("developer", lines, id);
     }
 
-    public void creattester(String username, String email, String password, String Usertype) {
+    public void creattester(String username, String email, String password) {
         String id = Auth.generateID("tester");
         List<String> lines = new ArrayList<>();
 

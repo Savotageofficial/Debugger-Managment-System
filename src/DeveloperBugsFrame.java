@@ -73,7 +73,9 @@ public class DeveloperBugsFrame extends JFrame {
             }
             StringBuilder sb = new StringBuilder();
             for (Comment c : comments) {
-                sb.append("Author: ").append(c.getAuthor()).append("\n");
+                String authorid = c.getAuthor();
+                String authorname = FilesStorage.fetchDeveloper(authorid).Name;
+                sb.append("Author: ").append(authorname).append("\n");
                 sb.append("Date: ").append(c.getDateCreated()).append("\n");
                 sb.append("Comment: ").append(c.getText()).append("\n\n");
             }
