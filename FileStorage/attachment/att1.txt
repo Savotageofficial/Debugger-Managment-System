@@ -1,5 +1,0 @@
-att1
-bug screenshot
-FileStorage/files/image.png
-12
-image/png

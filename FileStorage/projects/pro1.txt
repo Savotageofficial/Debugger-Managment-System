@@ -1,6 +1,0 @@
-pro1
-appetite
-an application for recipe showcases
-favourites button doesn't work
-dev1,dev2
-bug3

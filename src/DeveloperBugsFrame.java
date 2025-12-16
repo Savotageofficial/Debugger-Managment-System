@@ -18,14 +18,20 @@ public class DeveloperBugsFrame extends JFrame {
 
         DefaultListModel<BugReport> model = new DefaultListModel<>();
 
-        for (String bugId : project.getBugsid()) {
-            BugReport bug = FilesStorage.fetchBugData(bugId);
-            if (bug != null) model.addElement(bug);
+        if (project.getBugsid() != null) {
+
+            for (String bugId : project.getBugsid()) {
+                BugReport bug = FilesStorage.fetchBugData(bugId);
+                if (bug != null)
+                    model.addElement(bug);
+            }
         }
 
         JList<BugReport> bugList = new JList<>(model);
 
         JButton updateBtn = new JButton("Update Status");
+        JButton addCommentBtn = new JButton("Add Comment");
+        JButton viewCommentsBtn = new JButton("View Comments");
         JButton backBtn = new JButton("Back");
 
         updateBtn.addActionListener(e -> {
@@ -38,6 +44,47 @@ public class DeveloperBugsFrame extends JFrame {
             dispose();
         });
 
+        addCommentBtn.addActionListener(e -> {
+            BugReport selected = bugList.getSelectedValue();
+            if (selected == null) {
+                JOptionPane.showMessageDialog(this, "Select a bug first");
+                return;
+            }
+            String commentText = JOptionPane.showInputDialog(this, "Enter your comment:");
+            if (commentText != null && !commentText.trim().isEmpty()) {
+                String commentId = FilesStorage.generateCommentId();
+                Comment comment = new Comment(commentId, commentText, dev.getID());
+                FilesStorage.createCommentFile(comment);
+                selected.addComment(comment);
+                JOptionPane.showMessageDialog(this, "Comment added successfully!");
+            }
+        });
+
+        viewCommentsBtn.addActionListener(e -> {
+            BugReport selected = bugList.getSelectedValue();
+            if (selected == null) {
+                JOptionPane.showMessageDialog(this, "Select a bug first");
+                return;
+            }
+            List<Comment> comments = selected.getComments();
+            if (comments == null || comments.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No comments for this bug.");
+                return;
+            }
+            StringBuilder sb = new StringBuilder();
+            for (Comment c : comments) {
+                sb.append("Author: ").append(c.getAuthor()).append("\n");
+                sb.append("Date: ").append(c.getDateCreated()).append("\n");
+                sb.append("Comment: ").append(c.getText()).append("\n\n");
+            }
+            JTextArea textArea = new JTextArea(sb.toString());
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new java.awt.Dimension(400, 300));
+            JOptionPane.showMessageDialog(this, scrollPane, "Comments for: " + selected.getTitle(),
+                    JOptionPane.INFORMATION_MESSAGE);
+        });
+
         backBtn.addActionListener(e -> {
             new DeveloperProjectsFrame(dev).setVisible(true);
             dispose();
@@ -45,10 +92,11 @@ public class DeveloperBugsFrame extends JFrame {
 
         JPanel btnPanel = new JPanel();
         btnPanel.add(updateBtn);
+        btnPanel.add(addCommentBtn);
+        btnPanel.add(viewCommentsBtn);
         btnPanel.add(backBtn);
 
         add(new JScrollPane(bugList), BorderLayout.CENTER);
         add(btnPanel, BorderLayout.SOUTH);
     }
 }
-

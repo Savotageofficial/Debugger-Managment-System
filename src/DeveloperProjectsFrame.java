@@ -14,9 +14,18 @@ public class DeveloperProjectsFrame extends JFrame {
 
         DefaultListModel<Project> model = new DefaultListModel<>();
 
-        for (String id : dev.getAssignedProjectsIDs()) {
-            Project p = FilesStorage.fetchProjectData(id);
-            if (p != null) model.addElement(p);
+        if (!(dev.getAssignedProjectsIDs().isEmpty())) {
+
+            for (String id : dev.getAssignedProjectsIDs()) {
+                if (id == null || id.equalsIgnoreCase("null") || id.trim().isEmpty()) {
+                    continue;
+                }
+                Project p = FilesStorage.fetchProjectData(id);
+
+                if (p != null) {
+                    model.addElement(p);
+                }
+            }
         }
 
         JList<Project> projectList = new JList<>(model);

@@ -48,8 +48,7 @@ public class LoginFrame extends JFrame {
                 new TesterDashboardFrame((Tester) user).setVisible(true);
 
             } else {
-                JOptionPane.showMessageDialog(this,
-                        "Welcome " + user.Name + " (" + user.UserType + ")");
+                new DeveloperDashboardFrame((Developer) user).setVisible(true);
             }
 
         }

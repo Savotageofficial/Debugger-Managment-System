@@ -9,7 +9,7 @@ public class TesterProjectFixedBugsFrame extends JFrame {
     private Project project;
     private TesterProjectBugsFrame previousFrame;
 
-    public TesterProjectFixedBugsFrame(Tester tester , Project project , TesterProjectBugsFrame caller) {
+    public TesterProjectFixedBugsFrame(Tester tester , Project project , TesterProjectBugsFrame caller , List<BugReport> bugs) {
         this.tester = tester;
         this.project = project;
         this.previousFrame = caller;
@@ -39,8 +39,7 @@ public class TesterProjectFixedBugsFrame extends JFrame {
 
         List<BugReport> bugReports = new ArrayList<>();
 
-        for (String bugid : project.getBugsid()) {
-            BugReport bug = FilesStorage.fetchBugData(bugid);
+        for (BugReport bug : bugs) {
             if (bug.getStatus() == Status.FIXED) {
                 bugReports.add(bug);
             }
@@ -60,17 +59,34 @@ public class TesterProjectFixedBugsFrame extends JFrame {
             bugcontainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
             bugcontainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+            JPanel btncontainer = new JPanel();
+
             JLabel bugtitle = new JLabel(bug.getTitle());
             bugtitle.setFont(new Font("Verdana", Font.PLAIN, 15));
 
             JButton verifybtn = new JButton("verify bug fix");
+            JButton unverifybtn = new JButton("Reopen bug");
+
+            btncontainer.add(verifybtn);
+            btncontainer.add(unverifybtn);
 
             verifybtn.addActionListener(e ->{
                 tester.verifyBug(bug , Status.CLOSED);
+                JOptionPane.showMessageDialog(this, "Bug Closed!");
+                dispose();
+                previousFrame.setVisible(true);
+
+            });
+            unverifybtn.addActionListener(e ->{
+                tester.verifyBug(bug , Status.IN_PROGRESS);
+                JOptionPane.showMessageDialog(this, "Bug Reopened!");
+                dispose();
+                previousFrame.setVisible(true);
+
             });
 
             bugcontainer.add(bugtitle, BorderLayout.WEST);
-            bugcontainer.add(verifybtn, BorderLayout.EAST);
+            bugcontainer.add(btncontainer, BorderLayout.EAST);
 
             bugnames.add(bugcontainer);
             bugnames.add(Box.createVerticalStrut(5));

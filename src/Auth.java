@@ -54,42 +54,54 @@ public abstract class Auth {
             User dev = new Developer();
             List<User> userlist = dev.getUsers();
             List<String> userIds = new ArrayList<>();
+            if (userlist.isEmpty()){
+                return "dev1";
+            }
             for (User user : userlist){
                 userIds.add(user.getID());
             }
             sortByLastNumber(userIds);
 
 
-            return "dev" + extractNumber(userIds.getLast()) + 1;
+            return "dev" + (extractNumber(userIds.getLast()) + 1);
         }
         if (Type.equalsIgnoreCase("admin")){
             User adm = new Admin();
             List<User> userlist = adm.getUsers();
             List<String> userIds = new ArrayList<>();
+            if (userlist.isEmpty()){
+                return "adm1";
+            }
             for (User user : userlist){
                 userIds.add(user.getID());
             }
             sortByLastNumber(userIds);
 
 
-            return "adm" + extractNumber(userIds.getLast()) + 1;
+            return "adm" + (extractNumber(userIds.getLast()) + 1);
         }
         if (Type.equalsIgnoreCase("tester")){
             User tes = new Tester();
             List<User> userlist = tes.getUsers();
             List<String> userIds = new ArrayList<>();
+            if (userlist.isEmpty()){
+                return "tes1";
+            }
             for (User user : userlist){
                 userIds.add(user.getID());
             }
             sortByLastNumber(userIds);
 
 
-            return "tes" + extractNumber(userIds.getLast()) + 1;
+            return "tes" + (extractNumber(userIds.getLast()) + 1);
         }
         if (Type.equalsIgnoreCase("bug")){
             BugReport bug = new BugReport();
             List<BugReport> bugReportList = bug.getBugReports();
             List<String> bugIds = new ArrayList<>();
+            if (bugReportList.isEmpty()){
+                return "bug1";
+            }
             for (BugReport bugReport : bugReportList){
                 bugIds.add(bugReport.getID());
             }
@@ -102,13 +114,16 @@ public abstract class Auth {
             Project project = new Project();
             List<Project> projectList = project.getProjects();
             List<String> projectIds = new ArrayList<>();
+            if (projectList.isEmpty()){
+                return "pro1";
+            }
             for (Project pro : projectList){
                 projectIds.add(pro.getID());
             }
             sortByLastNumber(projectIds);
 
 
-            return "pro" + extractNumber(projectIds.getLast()) + 1;
+            return "pro" + (extractNumber(projectIds.getLast()) + 1);
         }
         return null;
     }

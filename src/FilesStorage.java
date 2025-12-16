@@ -52,9 +52,9 @@ public abstract class FilesStorage {
         if (!(projectlist.get(5).equalsIgnoreCase("null"))) {
 
             return new Project(projectlist.get(0), projectlist.get(1), projectlist.get(2), projectlist.get(3),
-                    new ArrayList<>(List.of(projectlist.get(4).split(","))), new ArrayList<>(List.of(projectlist.get(5).split(","))));
-        }
-        else {
+                    new ArrayList<>(List.of(projectlist.get(4).split(","))),
+                    new ArrayList<>(List.of(projectlist.get(5).split(","))));
+        } else {
             return new Project(projectlist.get(0), projectlist.get(1), projectlist.get(2), projectlist.get(3),
                     new ArrayList<>(List.of(projectlist.get(4).split(","))), null);
         }
@@ -70,7 +70,8 @@ public abstract class FilesStorage {
         Tester tester = new Tester(testerlist.get(0), testerlist.get(1), testerlist.get(2), testerlist.get(3));
 
         Project project = new Project(projectlist.get(0), projectlist.get(1), projectlist.get(2), projectlist.get(3),
-                new ArrayList<>(List.of(projectlist.get(4).split(","))), new ArrayList<>(List.of(projectlist.get(5).split(","))));
+                new ArrayList<>(List.of(projectlist.get(4).split(","))),
+                new ArrayList<>(List.of(projectlist.get(5).split(","))));
 
         String devid = FilesStorage.readline("bugreports/" + bugid + ".txt", 6);
 
@@ -79,7 +80,8 @@ public abstract class FilesStorage {
         if (!(devid.equalsIgnoreCase("null"))) {
             List<String> devlist = FilesStorage.readlines("developer/" + devid + ".txt");
             developer = new Developer(projectlist.get(0), projectlist.get(1), projectlist.get(2), projectlist.get(3),
-                    new ArrayList<>(List.of(projectlist.get(4).split(","))), new ArrayList<>(List.of(projectlist.get(5).split(","))));
+                    new ArrayList<>(List.of(projectlist.get(4).split(","))),
+                    new ArrayList<>(List.of(projectlist.get(5).split(","))));
         }
 
         List<String> commentids = new ArrayList<>(List.of(buglist.get(10).split(",")));
@@ -226,11 +228,20 @@ public abstract class FilesStorage {
         return "com" + (count + 1);
     }
 
+    public static void createCommentFile(Comment comment) {
+        List<String> lines = new ArrayList<String>();
+        lines.add(comment.getId());
+        lines.add(comment.getText());
+        lines.add(comment.getDateCreated().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        lines.add(comment.getAuthor());
+        FilesStorage.writefile("comments", lines, comment.getId());
+    }
+
     public static void updateBugStatus(String bugid, String status) {
         writeline("bugreports/" + bugid + ".txt", 3, status);
     }
 
-    public static void createBugFile(BugReport bug){
+    public static void createBugFile(BugReport bug) {
         List<String> lines = new ArrayList<String>();
 
         lines.add(bug.getID());
@@ -241,7 +252,7 @@ public abstract class FilesStorage {
         lines.add(bug.getReporter().getID());
         if (bug.getAssignee() != null) {
             lines.add(bug.getAssignee().getID());
-        }else {
+        } else {
             lines.add("null");
         }
         lines.add(bug.getAssignedProject().getID());
@@ -250,7 +261,7 @@ public abstract class FilesStorage {
         lines.add("null");
         lines.add("null");
 
-        FilesStorage.writefile("bugreports" , lines , bug.getID());
+        FilesStorage.writefile("bugreports", lines, bug.getID());
     }
 
 }
