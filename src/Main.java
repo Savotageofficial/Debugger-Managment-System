@@ -7,16 +7,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         new LoginFrame().setVisible(true);
         System.out.println("------BUG MANAGMENT SYSTEM-------");
-        // Project p=new Project("pro1","","");
-        // p.addDeveloper("dev4");
 
-        // User dev = new Admin();
-        // List<User> devlist = dev.getUsers();
-        // for (User developer : devlist) {
-        // System.out.println(developer.getID());
-        // }
 
-        // TODO this will be the Home Page
+
         Scanner input = new Scanner(System.in);
 
         System.out.print("enter your email: ");
@@ -24,7 +17,8 @@ public class Main {
         System.out.print("enter your password: ");
         String pass = input.nextLine();
 
-        User u = Auth.Login(email, pass);
+
+        User u = Auth.Login(email , pass);
 
         while (u == null) {
             System.out.println("invalid login credentials");
@@ -32,7 +26,7 @@ public class Main {
             email = input.nextLine();
             System.out.print("enter your password: ");
             pass = input.nextLine();
-            u = Auth.Login(email, pass);
+            u = Auth.Login(email , pass);
         }
 
         System.out.println("Welcome " + u.Name + "!");
@@ -77,27 +71,22 @@ public class Main {
             System.out.println("exiting!");
             Thread.sleep(10);
 
-        } else if (u.UserType.equalsIgnoreCase("tester") || u instanceof Tester) {
 
-            Tester tes = (Tester) u;
+        if (u.UserType.equalsIgnoreCase("admin")) {
 
-            Project pro = new Project();
+            int choice = -1;
 
-            List<Project> projects = pro.getProjects();
+            while (choice != 0) {
 
-            boolean continueSelectingProjects = true;
+                System.out.println("\n ADMIN MENU ");
+                System.out.println("1- Create Project");
+                System.out.println("2- View Projects");
+                System.out.println("3- Generate Report");
+                System.out.println("4- Assign Bug To Project");
+                System.out.println("0- Logout");
 
-            while (continueSelectingProjects) {
-                System.out.println("\n------Choose Preferred Project------\n");
-
-                for (int i = 0; i < projects.toArray().length; i++) {
-                    Project project = projects.get(i);
-                    System.out.println(i + "\t" + project.getName());
-                }
-                System.out.println(projects.size() + "\tExit");
-
-                System.out.print("choice: ");
-                int choice = input.nextInt();
+                System.out.print("Choice: ");
+                choice = input.nextInt();
                 input.nextLine();
                 if (choice == projects.size()) {
                     System.out.println("Goodbye!");
@@ -209,9 +198,6 @@ public class Main {
                         continueSelectingProjects = false;
                         System.out.println("Goodbye!");
                         break;
-
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
                 }
 
             }
@@ -223,7 +209,7 @@ public class Main {
 
             List<Project> projects = new ArrayList<Project>();
 
-            for (String projectid : projectsIDs) {
+            for(String projectid : projectsIDs){
                 Project project = FilesStorage.fetchProjectData(projectid);
                 projects.add(project);
             }
@@ -266,31 +252,32 @@ public class Main {
 
         }
 
+
     }
 
     private static void printProgressBar(int iteration, int total) {
-        int barLength = 50; // Length of the progress bar in characters
-        // Calculate the percentage completed
+        int barLength = 50;
+
         double percent = ((double) iteration / total) * 100;
-        // Calculate the number of filled characters
+
         int filledLength = (int) (barLength * iteration / total);
 
-        // Build the bar string
+
         StringBuilder bar = new StringBuilder();
         for (int i = 0; i < barLength; i++) {
             if (i < filledLength) {
-                bar.append("█"); // Use block character
+                bar.append("█");
             } else {
                 bar.append("-");
             }
         }
 
-        // Print the progress bar on the same line using carriage return (\r)
+
         String progress = String.format("\rProgress: |%s| %.1f%% (%d/%d)",
                 bar.toString(), percent, iteration, total);
         System.out.print(progress);
 
-        // Ensure the output is flushed immediately
+
         System.out.flush();
-    } // can be removed safely
+    }
 }

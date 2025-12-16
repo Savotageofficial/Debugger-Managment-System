@@ -5,8 +5,6 @@ public abstract class Auth {
 
 
     public static User Login(String email, String password) {
-//        email = email.replace(".com", ".txt");
-//        List<String> list = FilesStorage.readlines("developer/" + email); // target path to be changed
 
         User u = null;
         Admin adm = new Admin();
